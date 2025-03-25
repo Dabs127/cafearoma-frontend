@@ -1,5 +1,3 @@
-import Image from "next/image";
-import CoffeShopPicture from "@/public/coffeShop.jpg";
 import Carousel from "@/components/Carousel";
 import Latte from "@/public/latte.jpg";
 import Sandwich from "@/public/sandwich.jpg";
@@ -26,15 +24,12 @@ const slides = [
   },
 ];
 
-export default function ShowProducts() {
+export default function Test() {
   return (
-    <section>
-      <div
-        style={{ backgroundImage: `url(${CoffeShopPicture.src})` }}
-        className="object-contain max-w-full max-h-1/4 p-10 mx-10 my-20 flex justify-center items-center rounded-4xl shadow-2xl"
-      >
+    <div className="w-full h-auto">
+      <main className="w-[20%] m-auto pt-11">
         <Carousel slides={slides} />
-      </div>
-    </section>
+      </main>
+    </div>
   );
 }
