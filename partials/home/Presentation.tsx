@@ -10,7 +10,7 @@ export default function Presentation() {
         y postres.
       </p>
 
-      <Link href="#" className="bg-accent w-48 h-24 text-3xl flex items-center justify-center font-semibold text-light p-4 rounded-2xl">Ver Menú</Link>
+      <Link href="/menu" className="bg-accent w-48 h-24 text-3xl flex items-center justify-center font-semibold text-light p-4 rounded-2xl">Ver Menú</Link>
     </div>
   );
 }

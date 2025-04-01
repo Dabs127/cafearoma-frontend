@@ -8,12 +8,12 @@ export default function TheNavbar() {
       <Image src={logoPic} alt="Logo cafe aroma" width={60} />
       <ul className="flex grow gap-20">
         <li>
-          <Link href="#" className="text-secondary font-semibold">
+          <Link href="/" className="text-secondary font-semibold">
             Inicio
           </Link>
         </li>
         <li>
-          <Link href="#" className="text-secondary font-semibold">
+          <Link href="/menu" className="text-secondary font-semibold">
             Menú
           </Link>
         </li>

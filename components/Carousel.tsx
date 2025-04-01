@@ -27,7 +27,7 @@ const Carousel = (props: Props) => {
   }, [current]);
 
   return (
-    <div className="overflow-hidden w-1/4 relative max-h-1/2 bg-primary border-8 border-secondary rounded-4xl">
+    <div className="overflow-hidden w-2/6 relative max-h-1/2 bg-primary border-8 border-secondary rounded-4xl">
       <div
         className={`flex items-center transition duration-1000 ease-in-out`}
         style={{ transform: `translateX(-${current * 100}%)` }}
@@ -47,11 +47,11 @@ const Carousel = (props: Props) => {
         ))}
       </div>
 
-      <div className="absolute top-0 h-full w-full justify-between items-center flex text-accent px-10 text-3xl">
-        <button onClick={previousSlide}>
+      <div className="absolute top-0 h-full w-full justify-between items-center flex text-secondary px-10 text-4xl">
+        <button className="cursor-pointer" onClick={previousSlide}>
           <FaArrowAltCircleLeft />
         </button>
-        <button onClick={nextSlide}>
+        <button className="cursor-pointer" onClick={nextSlide}>
           <FaArrowAltCircleRight />
         </button>
       </div>
