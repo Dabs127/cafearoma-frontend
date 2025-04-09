@@ -11,6 +11,22 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
+  {
+    rules: {
+      "@typescript-eslint/ban-types": [
+        "error",
+        {
+          extendDefaults: true,
+          types: {
+            object: {
+              message: "Usa Record<string, unknown> en lugar de object",
+              fixWith: "Record<string, unknown>",
+            },
+          },
+        },
+      ],
+    },
+  },
 ];
 
 export default eslintConfig;
