@@ -32,7 +32,7 @@ export default function CategorySection() {
         const filteredItems = items.filter(
           (item) => item.category === category.name
         );
-        // console.log(filteredItems);
+
         // Filter items based on the selected itemFilter
         if (itemFilter && itemFilter !== category.name) {
           return null; // Skip rendering this category if the filter doesn't match

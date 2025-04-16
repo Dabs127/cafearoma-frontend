@@ -1,25 +1,67 @@
-import axios from "axios";
+import axios, { AxiosInstance } from "axios";
 
-const axiosInstance = axios.create({
+const axiosInstance: AxiosInstance = axios.create({
   baseURL: "http://localhost:3000/api",
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
-const get = async (url: string, config: Record<string, unknown>) => {
-    return axiosInstance.get(url, config);
+const get = async <T>(
+  url: string,
+  config: Record<string, unknown>
+): Promise<T> => {
+  try{
+    const response = await axiosInstance.get(url, config);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error;
+  }
+
 };
-const post = async (url: string, data: Record<string, unknown>, config: Record<string, unknown>) => {
-    return axiosInstance.post(url, data, config);
-}
-const put = async (url: string, data: Record<string, unknown>, config: Record<string, unknown>) => {
-    return axiosInstance.put(url, data, config);
-}
-const del = async (url: string, config: Record<string, unknown>) => {
-    return axiosInstance.delete(url, config);
-}
+const post = async <T>(
+  url: string,
+  data: Record<string, unknown>,
+  config: Record<string, unknown>
+): Promise<T> => {
+  try {
+    const response = await axiosInstance.post<T>(url, data, config);
+    return response.data;
+  } catch (error) {
+    console.error("Error posting data:", error);
+    throw error;
+  }
+};
+const put = async <T>(
+  url: string,
+  data: Record<string, unknown>,
+  config: Record<string, unknown>
+): Promise<T> => {
+  try {
+    const response = await axiosInstance.put(url, data, config);
+    return response.data;
+  } catch (error) {
+    console.error("Error putting data:", error);
+    throw error;
+  }
+};
+const del = async <T>(
+  url: string,
+  config: Record<string, unknown>
+): Promise<T> => {
+  try {
+    const response = await axiosInstance.delete(url, config);
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting data:", error);
+    throw error;
+  };
+};
 
 export const api = {
-    get,
-    post,
-    put,
-    del
+  get,
+  post,
+  put,
+  del,
 };
