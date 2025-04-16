@@ -18,7 +18,7 @@ export default function TheNavbar() {
           </Link>
         </li>
         <li>
-          <Link href="#" className="text-secondary font-semibold">
+          <Link href="/promotions" className="text-secondary font-semibold">
             Promociones
           </Link>
         </li>

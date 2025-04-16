@@ -20,7 +20,6 @@ export default function CategorySelector() {
       <ul className="flex">
         {
             categories.map((category) => {
-              console.log(category.category, itemFilter);
                 return (
                 <li key={category.name} className="w-full h-15 flex flex-col justify-center items-center text-lg text-accent font-semibold" onClick={() => setItemFilter(category.category)}>
                     <span className={`text-3xl p-2 rounded-full ${category.category === itemFilter ? "text-accent" : "text-text-muted"} hover:text-accent transition-all duration-300 ease-in-out cursor-pointer`}>{category.icon}</span>
