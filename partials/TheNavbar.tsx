@@ -23,7 +23,7 @@ export default function TheNavbar() {
           </Link>
         </li>
         <li>
-          <Link href="#" className="text-secondary font-semibold">
+          <Link href="/contact" className="text-secondary font-semibold">
             Contacto
           </Link>
         </li>
