@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import TheNavbar from "@/partials/TheNavbar";
-import Presentation from "@/partials/home/Presentation";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import TheFooter from "@/partials/TheFooter";
