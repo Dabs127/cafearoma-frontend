@@ -12,7 +12,10 @@ const get = async <T>(
   config: Record<string, unknown>
 ): Promise<T> => {
   try{
-    const response = await axiosInstance.get(url, config);
+    const response = await axiosInstance.get(url, {
+      withCredentials: true,
+      ...config
+    });
     return response.data;
   } catch (error) {
     console.error("Error fetching data:", error);
@@ -26,7 +29,10 @@ const post = async <T>(
   config: Record<string, unknown>
 ): Promise<T> => {
   try {
-    const response = await axiosInstance.post<T>(url, data, config);
+    const response = await axiosInstance.post<T>(url, data, {
+      withCredentials: true,
+      ...config
+    });
     return response.data;
   } catch (error) {
     console.error("Error posting data:", error);

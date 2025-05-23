@@ -29,7 +29,7 @@ export default function TheNavbar() {
         </li>
       </ul>
       <Link
-        href="#"
+        href="/login"
         className="w-[7rem] text-center mr-5 p-4 rounded-xl font-semibold bg-secondary  text-text-default"
       >
         Unirse

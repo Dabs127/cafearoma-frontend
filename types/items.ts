@@ -7,3 +7,7 @@ export interface Item {
     imageUrl: string;
     category: string;
 }
+
+export interface ItemResponse {
+    items: Item[];  
+}
