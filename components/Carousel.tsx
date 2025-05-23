@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa";
 
@@ -27,14 +28,15 @@ const Carousel = (props: Props) => {
   }, [current]);
 
   return (
-    <div className="overflow-hidden w-2/6 relative max-h-1/2 bg-primary border-8 border-secondary rounded-4xl">
+    <div className="overflow-hidden w-2/6 relative min-h-full bg-[rgba(255,219,181,0.6)] border-8 border-secondary rounded-4xl">
       <div
         className={`flex items-center transition duration-1000 ease-in-out`}
         style={{ transform: `translateX(-${current * 100}%)` }}
       >
         {props.slides.map((slide, index) => (
           <div className="min-w-full w-full h-full py-10 flex flex-col justify-center items-center " key={index}>
-            <img
+            <Image
+            lazyBoundary="false"
               src={slide.src}
               alt={slide.alt}
               className=" object-contain mb-4"
@@ -42,7 +44,7 @@ const Carousel = (props: Props) => {
               height={300}
             />
             <h1 className="text-5xl text-white font-extrabold tracking-wider" style={{WebkitTextStroke: "3px #6C4E31"}}>{slide.title}</h1>
-            <p className="text-white text-2xl text-center">{slide.description}</p>
+            <p className="text-secondary font-semibold text-2xl text-center">{slide.description}</p>
           </div>
         ))}
       </div>

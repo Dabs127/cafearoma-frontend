@@ -20,7 +20,7 @@ export default function CategorySection() {
 
   useEffect(() => {
     const fetchItems = async () => {
-      const items = await getAllItems();
+      const {items} = await getAllItems();
       setItems(items);
     };
     fetchItems();
@@ -29,6 +29,7 @@ export default function CategorySection() {
   return (
     <>
       {categories.map((category) => {
+        if(items.length === 0) return null; // Skip rendering if items are not loaded yet
         const filteredItems = items.filter(
           (item) => item.category === category.name
         );

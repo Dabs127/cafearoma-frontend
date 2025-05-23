@@ -1,9 +1,8 @@
-import Image from "next/image";
 import CoffeShopPicture from "@/public/coffeShop.jpg";
 import Carousel from "@/components/Carousel";
-import Latte from "@/public/latte.jpg";
-import Sandwich from "@/public/sandwich.jpg";
-import Frappe from "@/public/frappe.jpg";
+import Latte from "@/public/cafe.png";
+import Sandwich from "@/public/sandwich.png";
+import Frappe from "@/public/frappe.png";
 
 const slides = [
   {
