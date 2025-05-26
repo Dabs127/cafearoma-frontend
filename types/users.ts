@@ -13,6 +13,7 @@ export interface UserRegisterData extends Record<string, unknown> {
 }
 
 export interface UserRegisterResponse {
+    success: boolean,
     data: {
         message: string,
         userId?: number,
@@ -28,7 +29,8 @@ export interface UserLoginData extends Record<string, unknown> {
 export interface UserLoginResponse {
     success: boolean,
     data: {
-        userId: string;
-        email: string;
+        userId?: string;
+        email?: string;
+        message?: string;
     }
 }
