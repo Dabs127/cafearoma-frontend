@@ -1,8 +1,22 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import logoPic from "@/public/logoCafeAroma.png";
+import { RiAccountCircleFill } from "react-icons/ri";
+import { Session, useSessionStore } from "@/stores/useSessionStore";
+import { useEffect } from "react";
+import { api } from "@/actions/api";
+import { useFetchSession } from "@/hooks/useFetchSession";
 
 export default function TheNavbar() {
+ const { session, loading} = useSessionStore();
+  const fetchSession = useFetchSession();
+
+  useEffect(() => {
+    fetchSession();
+  }, [fetchSession]);
+
   return (
     <nav className="w-full h-auto bg-primary p-3 flex items-center gap-10">
       <Image src={logoPic} alt="Logo cafe aroma" width={60} />
@@ -28,12 +42,21 @@ export default function TheNavbar() {
           </Link>
         </li>
       </ul>
-      <Link
-        href="/login"
-        className="w-[7rem] text-center mr-5 p-4 rounded-xl font-semibold bg-secondary  text-text-default"
-      >
-        Unirse
-      </Link>
+      {!loading && !session ? (
+        <Link
+          href="/login"
+          className="w-[7rem] text-center p-4 rounded-xl font-semibold bg-secondary  text-text-default"
+        >
+          Unirse
+        </Link>
+      ) : (
+        <Link
+          href="/profile"
+          className=" text-center text-5xl rounded-xl font-semibold bg-secondary text-text-default"
+        >
+          <RiAccountCircleFill />
+        </Link>
+      )}
     </nav>
   );
 }

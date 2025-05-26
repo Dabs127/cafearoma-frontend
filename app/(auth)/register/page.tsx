@@ -35,7 +35,7 @@ export default function RegisterPage() {
         <input
           type="text"
           className={`w-full p-2 border ${ errors.username?.message ? "border border-red-500" : "border-text-muted"} bg-white rounded-md`}
-          placeholder="Nombre completo"
+          placeholder="Nombre de usuario"
           {...register("username")}
         />
         <p className="min-w-full min-h-5 text-red-500">

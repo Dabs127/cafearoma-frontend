@@ -4,7 +4,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginUser } from "@/actions/users/usersActions";
 import { LoginUserFormSchema } from "@/schemas/auth/loginSchema";
-import { useSessionStore } from "@/stores/useSessionStore";
+import { useSessionStore, Session } from "@/stores/useSessionStore";
+import { redirect } from "next/navigation";
+import { api } from "@/actions/api";
 
 export default function LoginPage() {
   const {
@@ -15,11 +17,46 @@ export default function LoginPage() {
     resolver: zodResolver(LoginUserFormSchema),
   });
 
-  const { session } = useSessionStore();
+  const { setSession, setLoading } = useSessionStore();
 
   const onSubmit = async (data: any) => {
-    await loginUser(data);
-    
+    const result = await loginUser(data);
+
+    if (!result.success) return;
+
+    setLoading(true);
+
+    try {
+      const res = await api.get<Session>("/auth/session", {});
+      setSession(res);
+      setLoading(false);
+
+      // Redirigir después de un breve retraso opcional
+      setTimeout(() => {
+        redirect("/");
+      }, 1000);
+    } catch (error) {
+      console.error("Error al obtener la sesión tras login:", error);
+
+      try {
+        await api.post("/auth/refresh", {}, {});
+
+        // Esperar un poco para que el token refreshed se registre
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
+        const res = await api.get<Session>("/auth/session", {});
+        setSession(res);
+        setLoading(false);
+
+        setTimeout(() => {
+          redirect("/");
+        }, 1000);
+      } catch (err) {
+        console.error("No se pudo obtener sesión ni refrescar el token:", err);
+        setSession(null);
+        setLoading(false);
+      }
+    }
   };
 
   return (
