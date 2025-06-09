@@ -10,6 +10,7 @@ export const useFetchSession = () => {
     setLoading(true);
     try {
       const res = await api.get<Session>("/auth/session", {});
+      console.log("Session fetched successfully", res);
       setSession(res);
     } catch {
       console.warn("Access token is invalid or expired");

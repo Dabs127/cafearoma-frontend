@@ -5,6 +5,8 @@ import MenuItemCard from "@/components/MenuItemCard";
 import { getAllItems } from "@/actions/items/itemsActions";
 import { Item } from "@/types/items";
 import useItemFilterStore from "@/stores/useItemFilterStore";
+import useItemsStore from "@/stores/useItemsStore";
+import axios from "axios";
 
 const categories = [
   { name: "cafes" },
@@ -15,12 +17,12 @@ const categories = [
 ];
 
 export default function CategorySection() {
-  const [items, setItems] = useState<Item[]>([]);
   const { itemFilter } = useItemFilterStore();
+  const { items, setItems } = useItemsStore();
 
   useEffect(() => {
     const fetchItems = async () => {
-      const {items} = await getAllItems();
+      const { items } = await getAllItems();
       setItems(items);
     };
     fetchItems();
@@ -29,7 +31,7 @@ export default function CategorySection() {
   return (
     <>
       {categories.map((category) => {
-        if(items.length === 0) return null; // Skip rendering if items are not loaded yet
+        if (items.length === 0) return null; // Skip rendering if items are not loaded yet
         const filteredItems = items.filter(
           (item) => item.category === category.name
         );

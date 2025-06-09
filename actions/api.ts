@@ -2,9 +2,7 @@ import axios, { AxiosInstance } from "axios";
 
 const axiosInstance: AxiosInstance = axios.create({
   baseURL: "http://localhost:3000/api",
-  headers: {
-    "Content-Type": "application/json",
-  },
+  withCredentials: true
 });
 
 const get = async <T>(
@@ -13,7 +11,6 @@ const get = async <T>(
 ): Promise<T> => {
   try{
     const response = await axiosInstance.get(url, {
-      withCredentials: true,
       ...config
     });
     return response.data;
@@ -25,11 +22,11 @@ const get = async <T>(
 };
 const post = async <T>(
   url: string,
-  data: Record<string, unknown>,
+  data: Record<string, unknown> | FormData,
   config: Record<string, unknown>
 ): Promise<T> => {
   try {
-    const response = await axiosInstance.post<T>(url, data, {
+    const response = await axiosInstance.post(url, data, {
       withCredentials: true,
       ...config
     });

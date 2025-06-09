@@ -6,7 +6,6 @@ import logoPic from "@/public/logoCafeAroma.png";
 import { RiAccountCircleFill } from "react-icons/ri";
 import { Session, useSessionStore } from "@/stores/useSessionStore";
 import { useEffect } from "react";
-import { api } from "@/actions/api";
 import { useFetchSession } from "@/hooks/useFetchSession";
 
 export default function TheNavbar() {
@@ -27,7 +26,7 @@ export default function TheNavbar() {
           </Link>
         </li>
         <li>
-          <Link href="/menu" className="text-secondary font-semibold">
+          <Link href="/menu" className="text-secondary font-semibold" prefetch={true}>
             Menú
           </Link>
         </li>
