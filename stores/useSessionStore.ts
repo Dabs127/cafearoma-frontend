@@ -1,6 +1,5 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { api } from "@/actions/api";
 
 export type Session = {
   authenticated: boolean;

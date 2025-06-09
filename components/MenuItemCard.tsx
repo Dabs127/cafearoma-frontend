@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Latte from "@/public/cafe.png";
 import Link from "next/link";
 import { Item } from "@/types/items";
 
@@ -14,7 +13,9 @@ export default function MenuItemCard({ item }: MenuItemCardProps) {
         <div className="w-full h-3/8 flex justify-center items-center overflow-hidden rounded-t-3xl shadow-lg">
           <Image
             className="w-full h-full object-fill hover:scale-115 transition-all duration-300 ease-in-out"
-            src={item.imageUrl || Latte}
+            width={500}
+            height={500}
+            src={item.imgUrl}
             alt={`Imagen de ${item.name}`}
           />
         </div>
