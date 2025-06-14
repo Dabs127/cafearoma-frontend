@@ -4,30 +4,31 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { IoClose } from "react-icons/io5";
 import { useState } from "react";
-import { CreateNewMenuItemFormSchema } from "@/schemas/menuItem/CreateNewMenuItemFormSchema"; // Asegúrate de importar tu schema
-import { getAllItems, postItem } from "@/actions/items/itemsActions";
-import { ItemPostFields } from "@/types/items";
 import useItemsStore from "@/stores/useItemsStore";
+import { CreateNewPromotionFormSchema } from "@/schemas/promotion/CreateNewPromotionFormSchema";
+import { PromotionPostFields } from "@/types/promotions";
+import { getAllPromotions, postPromotion } from "@/actions/promotions/promotionsActions";
+import usePromotionsStore from "@/stores/usePromotionsStore";
 
 type Props = {
   onClose: () => void;
 };
 
-const CreateNewMenuItemModal = (props: Props) => {
+const CreateNewPromotionModal = (props: Props) => {
   const {
     register,
     control,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(CreateNewMenuItemFormSchema),
+    resolver: zodResolver(CreateNewPromotionFormSchema),
   });
 
-  const { setItems } = useItemsStore();
+  const { setPromotions } = usePromotionsStore();
 
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
-  const onSubmit = async (data: ItemPostFields) => {
+  const onSubmit = async (data: PromotionPostFields) => {
     const formData = new FormData();
     for (const [key, value] of Object.entries(data)) {
       if (value instanceof File) {
@@ -39,10 +40,10 @@ const CreateNewMenuItemModal = (props: Props) => {
       }
     }
     props.onClose();
-    await postItem(formData);
+    await postPromotion(formData);
 
-    const { items } = await getAllItems();
-    setItems(items);
+    const { promotions } = await getAllPromotions();
+    setPromotions(promotions);
   };
 
   return (
@@ -54,7 +55,9 @@ const CreateNewMenuItemModal = (props: Props) => {
             onClick={props.onClose}
           />
         </p>
-        <h2 className="text-2xl text-accent font-semibold mb-4">Nuevo Item</h2>
+        <h2 className="text-2xl text-accent font-semibold mb-4">
+          Nueva Promoción
+        </h2>
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="w-full flex flex-col gap-2 items-end"
@@ -62,67 +65,77 @@ const CreateNewMenuItemModal = (props: Props) => {
           <input
             type="text"
             className={`w-full p-2 border ${
-              errors.name?.message
+              errors.title?.message
                 ? "border border-red-500"
                 : "border-text-muted"
             } bg-white rounded-md `}
-            placeholder="Ingrese el nombre del platillo"
-            {...register("name")}
+            placeholder="Ingrese el titulo de la promoción"
+            {...register("title")}
           />
           <p className="min-w-full min-h-4 text-red-500">
-            {errors.name?.message}
+            {errors.title?.message}
           </p>
 
           <input
             type="text"
             className={`w-full p-2 border ${
-              errors.price?.message
+              errors.shortDescription?.message
                 ? "border border-red-500"
                 : "border-text-muted"
             } bg-white rounded-md `}
-            placeholder="Ingrese el precio del platillo"
-            {...register("price")}
+            placeholder="Ingrese una descripción corta de la promoción"
+            {...register("shortDescription")}
           />
           <p className="min-w-full min-h-4 text-red-500">
-            {errors.price?.message}
-          </p>
-
-          <select
-            id="category"
-            className={`w-full p-2 border ${
-              errors.category?.message
-                ? "border border-red-500"
-                : "border-text-muted"
-            } bg-white rounded-md `}
-            {...register("category")}
-          >
-            <option value="cafes">Cáfes</option>
-            <option value="postres">Postres</option>
-            <option value="desayunos">Desayunos</option>
-            <option value="comida">Comida</option>
-            <option value="jugos">Jugos</option>
-          </select>
-
-          <p className="min-w-full min-h-4 text-red-500">
-            {errors.category?.message}
+            {errors.shortDescription?.message}
           </p>
 
           <textarea
             className={`w-full p-2 border ${
-              errors.description?.message
+              errors.longDescription?.message
                 ? "border border-red-500"
                 : "border-text-muted"
             } bg-white rounded resize-none `}
-            placeholder="Ingrese la descripción del platillo"
-            rows={6}
-            {...register("description")}
+            placeholder="Ingrese la descripción extensa y concreta de la promoción"
+            rows={5}
+            {...register("longDescription")}
           ></textarea>
           <p className="min-w-full min-h-4 text-red-500">
-            {errors.description?.message}
+            {errors.longDescription?.message}
+          </p>
+
+          <label
+            htmlFor="startDate"
+            className="w-full text-start text-gray-500"
+          >
+            Fecha de inicio de la promoción
+          </label>
+          <input
+            id="startDate"
+            className="w-full text-gray-800"
+            type="date"
+            {...register("startDate")}
+          />
+          <p className="min-w-full min-h-4 text-red-500">
+            {errors.startDate?.message}
+          </p>
+          <label
+            htmlFor="endDate"
+            className="w-full text-start text-gray-500"
+          >
+            Fecha de fin de la promoción
+          </label>
+          <input
+            className="w-full text-gray-800"
+            type="date"
+            {...register("endDate")}
+          />
+          <p className="min-w-full min-h-4 text-red-500">
+            {errors.endDate?.message}
           </p>
 
           <label className="w-full block text-lg font-medium text-gray-500">
-            Subir imagen del platillo
+            Subir imagen de la promoción
           </label>
 
           <Controller
@@ -181,4 +194,4 @@ const CreateNewMenuItemModal = (props: Props) => {
   );
 };
 
-export default CreateNewMenuItemModal;
+export default CreateNewPromotionModal;

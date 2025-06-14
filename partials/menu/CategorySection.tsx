@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import MenuItemCard from "@/components/MenuItemCard";
 import { getAllItems } from "@/actions/items/itemsActions";
-import { Item } from "@/types/items";
 import useItemFilterStore from "@/stores/useItemFilterStore";
 import useItemsStore from "@/stores/useItemsStore";
-import axios from "axios";
+import { api } from "@/actions/api";
+import { ItemResponse } from "@/types/items";
 
 const categories = [
   { name: "cafes" },
@@ -23,6 +23,7 @@ export default function CategorySection() {
   useEffect(() => {
     const fetchItems = async () => {
       const { items } = await getAllItems();
+      await api.get("/debug-cookies", {});
       setItems(items);
     };
     fetchItems();

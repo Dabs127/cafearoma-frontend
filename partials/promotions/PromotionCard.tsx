@@ -12,7 +12,7 @@ export default function PromotionCard({promotion}: PromotionCardProps) {
       <div className="w-full h-4/9 flex justify-center items-center overflow-hidden rounded-t-3xl max-h-80">
         <img
           className="w-full h-full object-fill hover:scale-115 transition-all duration-300 ease-in-out"
-          src="/latte.jpg"
+          src={`${promotion.imgUrl}`}
           alt={`Image of promotion ${promotion.title}`}
         />
       </div>

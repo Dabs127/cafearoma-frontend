@@ -1,6 +1,6 @@
 "use client";
 import { getAllPromotions } from "@/actions/promotions/promotionsActions";
-import PromotionCard from "@/components/PromotionCard";
+import PromotionCard from "@/partials/promotions/PromotionCard";
 import { Promotion } from "@/types/promotions";
 import { useEffect, useState } from "react";
 

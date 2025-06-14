@@ -8,3 +8,16 @@ export interface Promotion {
     startDate: Date;
     endDate: Date;
 }
+
+export interface PromotionResponse {
+    promotions: Promotion[]
+}
+
+export interface PromotionPostFields {
+    endDate: string;
+    image: File;
+    longDescription: string;
+    shortDescription: string;
+    startDate: string;
+    title: string;
+}
