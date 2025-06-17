@@ -27,7 +27,6 @@ const post = async <T>(
 ): Promise<T> => {
   try {
     const response = await axiosInstance.post(url, data, {
-      withCredentials: true,
       ...config
     });
     return response.data;

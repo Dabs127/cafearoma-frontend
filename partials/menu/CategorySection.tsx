@@ -1,12 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import MenuItemCard from "@/components/MenuItemCard";
 import { getAllItems } from "@/actions/items/itemsActions";
-import { Item } from "@/types/items";
 import useItemFilterStore from "@/stores/useItemFilterStore";
 import useItemsStore from "@/stores/useItemsStore";
-import axios from "axios";
 
 const categories = [
   { name: "cafes" },
