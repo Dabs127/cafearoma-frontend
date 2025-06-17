@@ -7,7 +7,10 @@ import { useState } from "react";
 import useItemsStore from "@/stores/useItemsStore";
 import { CreateNewPromotionFormSchema } from "@/schemas/promotion/CreateNewPromotionFormSchema";
 import { PromotionPostFields } from "@/types/promotions";
-import { getAllPromotions, postPromotion } from "@/actions/promotions/promotionsActions";
+import {
+  getAllPromotions,
+  postPromotion,
+} from "@/actions/promotions/promotionsActions";
 import usePromotionsStore from "@/stores/usePromotionsStore";
 
 type Props = {
@@ -48,7 +51,7 @@ const CreateNewPromotionModal = (props: Props) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-      <div className="min-w-100 bg-white p-6 rounded-lg shadow-lg w-96">
+      <div className="min-w-100 w-96 max-h-[90%] overflow-y-auto bg-white p-6 rounded-lg shadow-lg">
         <p className="w-full flex justify-end text-gray-500">
           <IoClose
             className="text-4xl cursor-pointer"
@@ -119,10 +122,7 @@ const CreateNewPromotionModal = (props: Props) => {
           <p className="min-w-full min-h-4 text-red-500">
             {errors.startDate?.message}
           </p>
-          <label
-            htmlFor="endDate"
-            className="w-full text-start text-gray-500"
-          >
+          <label htmlFor="endDate" className="w-full text-start text-gray-500">
             Fecha de fin de la promoción
           </label>
           <input
@@ -133,6 +133,11 @@ const CreateNewPromotionModal = (props: Props) => {
           <p className="min-w-full min-h-4 text-red-500">
             {errors.endDate?.message}
           </p>
+
+          <label htmlFor="authenticationRequired" className="w-full text-start text-gray-500">
+            El usuario requiere estar loggeado para poder aprovechar la promoción?
+          </label>
+          <input className="mr-auto w-10 h-5" type="checkbox" {...register("authenticationRequired")} />
 
           <label className="w-full block text-lg font-medium text-gray-500">
             Subir imagen de la promoción

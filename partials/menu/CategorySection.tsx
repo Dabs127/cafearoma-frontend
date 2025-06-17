@@ -5,8 +5,6 @@ import MenuItemCard from "@/components/MenuItemCard";
 import { getAllItems } from "@/actions/items/itemsActions";
 import useItemFilterStore from "@/stores/useItemFilterStore";
 import useItemsStore from "@/stores/useItemsStore";
-import { api } from "@/actions/api";
-import { ItemResponse } from "@/types/items";
 
 const categories = [
   { name: "cafes" },
@@ -23,7 +21,6 @@ export default function CategorySection() {
   useEffect(() => {
     const fetchItems = async () => {
       const { items } = await getAllItems();
-      await api.get("/debug-cookies", {});
       setItems(items);
     };
     fetchItems();

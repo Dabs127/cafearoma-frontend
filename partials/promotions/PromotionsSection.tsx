@@ -1,15 +1,16 @@
 "use client";
 import { getAllPromotions } from "@/actions/promotions/promotionsActions";
 import PromotionCard from "@/partials/promotions/PromotionCard";
-import { Promotion } from "@/types/promotions";
-import { useEffect, useState } from "react";
+import usePromotionsStore from "@/stores/usePromotionsStore";
+import { useEffect } from "react";
 
 export default function PromotionsSection() {
-  const [promotions, setPromotions] = useState<Promotion[]>([]);
+  const { promotions, setPromotions } = usePromotionsStore();
 
   useEffect(() => {
     const fetchPromotions = async () => {
-      const promotions = await getAllPromotions();
+      const { promotions } = await getAllPromotions();
+      console.log("Promociones: ", promotions)
       setPromotions(promotions);
     };
     fetchPromotions();

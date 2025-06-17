@@ -5,6 +5,7 @@ export const CreateNewPromotionFormSchema = z.object({
   longDescription: z.string(),
   shortDescription: z.string(),
   startDate: z.string().date(),
+  authenticationRequired: z.boolean(),
   title: z.string(),
   image: z
     .custom<File>((file) => file instanceof File && file.size > 0, {
