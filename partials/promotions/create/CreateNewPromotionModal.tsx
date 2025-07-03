@@ -4,28 +4,31 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { IoClose } from "react-icons/io5";
 import { useState } from "react";
-import useItemsStore from "@/stores/useItemsStore";
-import { CreateNewPromotionFormSchema } from "@/schemas/promotion/CreateNewPromotionFormSchema";
+import { CreateNewPromotionValues, getCreateNewPromotionFormSchema } from "@/schemas/promotion/CreateNewPromotionFormSchema";
 import { PromotionPostFields } from "@/types/promotions";
 import {
   getAllPromotions,
   postPromotion,
 } from "@/actions/promotions/promotionsActions";
 import usePromotionsStore from "@/stores/usePromotionsStore";
+import { useTranslations } from "next-intl";
 
 type Props = {
   onClose: () => void;
 };
 
 const CreateNewPromotionModal = (props: Props) => {
+  const validationMessages = useTranslations("PromotionsPage.createNewPromotionFormValidation")
   const {
     register,
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    resolver: zodResolver(CreateNewPromotionFormSchema),
+  } = useForm<CreateNewPromotionValues>({
+    resolver: zodResolver(getCreateNewPromotionFormSchema(validationMessages)),
   });
+
+  const t = useTranslations("PromotionsPage.newPromotionModal")
 
   const { setPromotions } = usePromotionsStore();
 
@@ -59,7 +62,7 @@ const CreateNewPromotionModal = (props: Props) => {
           />
         </p>
         <h2 className="text-2xl text-accent font-semibold mb-4">
-          Nueva Promoción
+          {t("modalTitle")}
         </h2>
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -72,7 +75,7 @@ const CreateNewPromotionModal = (props: Props) => {
                 ? "border border-red-500"
                 : "border-text-muted"
             } bg-white rounded-md `}
-            placeholder="Ingrese el titulo de la promoción"
+            placeholder={t("title")}
             {...register("title")}
           />
           <p className="min-w-full min-h-4 text-red-500">
@@ -86,7 +89,7 @@ const CreateNewPromotionModal = (props: Props) => {
                 ? "border border-red-500"
                 : "border-text-muted"
             } bg-white rounded-md `}
-            placeholder="Ingrese una descripción corta de la promoción"
+            placeholder={t("shortDescription")}
             {...register("shortDescription")}
           />
           <p className="min-w-full min-h-4 text-red-500">
@@ -99,7 +102,7 @@ const CreateNewPromotionModal = (props: Props) => {
                 ? "border border-red-500"
                 : "border-text-muted"
             } bg-white rounded resize-none `}
-            placeholder="Ingrese la descripción extensa y concreta de la promoción"
+            placeholder={t("longDescription")}
             rows={5}
             {...register("longDescription")}
           ></textarea>
@@ -111,7 +114,7 @@ const CreateNewPromotionModal = (props: Props) => {
             htmlFor="startDate"
             className="w-full text-start text-gray-500"
           >
-            Fecha de inicio de la promoción
+            {t("startDate")}
           </label>
           <input
             id="startDate"
@@ -123,7 +126,7 @@ const CreateNewPromotionModal = (props: Props) => {
             {errors.startDate?.message}
           </p>
           <label htmlFor="endDate" className="w-full text-start text-gray-500">
-            Fecha de fin de la promoción
+            {t("endDate")}
           </label>
           <input
             className="w-full text-gray-800"
@@ -135,12 +138,12 @@ const CreateNewPromotionModal = (props: Props) => {
           </p>
 
           <label htmlFor="authenticationRequired" className="w-full text-start text-gray-500">
-            El usuario requiere estar loggeado para poder aprovechar la promoción?
+            {t("authenticationRequired")}
           </label>
           <input className="mr-auto w-10 h-5" type="checkbox" {...register("authenticationRequired")} />
 
           <label className="w-full block text-lg font-medium text-gray-500">
-            Subir imagen de la promoción
+            {t("image")}
           </label>
 
           <Controller
@@ -176,7 +179,7 @@ const CreateNewPromotionModal = (props: Props) => {
 
           {imagePreview && (
             <div className="w-full mt-2">
-              <p className="text-sm text-gray-500 mb-1">Vista previa:</p>
+              <p className="text-sm text-gray-500 mb-1">{t("preview")}</p>
               <div className="w-32 h-32 border border-gray-300 rounded overflow-hidden">
                 <img
                   src={imagePreview}
@@ -191,7 +194,7 @@ const CreateNewPromotionModal = (props: Props) => {
             type="submit"
             className="w-1/2 bg-accent text-white text-xl font-semibold mt-5 p-2 rounded cursor-pointer hover:bg-green-700 transition-colors duration-300"
           >
-            Guardar
+            {t("submitButton")}
           </button>
         </form>
       </div>

@@ -3,24 +3,26 @@
 import Link from "next/link";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { RegisterUserFormSchema } from "@/schemas/auth/registerSchema";
-import { UserRegisterData } from "@/types/users";
+import { getRegisterUserFormSchema, RegisterUserFormSchema, RegisterUserValues } from "@/schemas/auth/registerSchema";
 import { registerUser } from "@/actions/users/usersActions";
+import { useTranslations } from "next-intl";
 
 export default function RegisterPage() {
+  const validationMessages = useTranslations("RegisterPage.formValidation")
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    resolver: zodResolver(RegisterUserFormSchema),
+  } = useForm<RegisterUserValues>({
+    resolver: zodResolver(getRegisterUserFormSchema(validationMessages)),
   });
+
+  const t = useTranslations("RegisterPage");
 
   const onSubmit = async (data: any) => {
     try {
       console.log("data", data);  
       await registerUser(data);
-      console.log("hola");
     } catch {
       console.log("Something wrong happened");
     }
@@ -35,7 +37,7 @@ export default function RegisterPage() {
         <input
           type="text"
           className={`w-full p-2 border ${ errors.username?.message ? "border border-red-500" : "border-text-muted"} bg-white rounded-md`}
-          placeholder="Nombre de usuario"
+          placeholder={ t("form.name") }
           {...register("username")}
         />
         <p className="min-w-full min-h-5 text-red-500">
@@ -44,7 +46,7 @@ export default function RegisterPage() {
         <input
           type="text"
           className={`w-full p-2 border ${ errors.email?.message ? "border border-red-500" : "border-text-muted"} bg-white rounded-md`}
-          placeholder="Correo eléctronico"
+          placeholder={ t("form.email") }
           {...register("email")}
         />
         <p className="min-w-full min-h-5 text-red-500">
@@ -53,7 +55,7 @@ export default function RegisterPage() {
         <input
           type="text"
           className={`w-full p-2 border ${ errors.password?.message ? "border border-red-500" : "border-text-muted"} bg-white rounded-md`}
-          placeholder="Contraseña"
+          placeholder={ t("form.password") }
           {...register("password")}
         />
         <p className="min-w-full min-h-5 text-red-500">
@@ -62,7 +64,7 @@ export default function RegisterPage() {
         <input
           type="text"
           className={`w-full p-2 border ${ errors.confirm_password?.message ? "border border-red-500" : "border-text-muted"} bg-white rounded-md`}
-          placeholder="Confirmar contraseña"
+          placeholder={ t("form.confirmPassword") }
           {...register("confirm_password")}
         />
         <p className="min-w-full min-h-5 text-red-500">
@@ -71,20 +73,20 @@ export default function RegisterPage() {
         <input
           type="text"
           className={`"w-full p-2 border ${ errors.phone?.message ? "border border-red-500" : "border-text-muted"} bg-white rounded-md`}
-          placeholder="Teléfono (opcional)"
+          placeholder={ t("form.phone") }
           {...register("phone")}
         />
         <p className="min-w-full min-h-5 text-red-500">
           {errors.phone?.message}
         </p>
         <p className="text-gray-300 text-center">
-          Al crear una cuenta aceptas el{" "}
+          {t("form.AcceptingTerms")}{" "}
           <Link href="#" className="underline">
-            Aviso de Privacidad
+            {t("form.termsAndConditions")}
           </Link>
         </p>
         <button type="submit" className="p-4 rounded-2xl bg-accent text-white cursor-pointer">
-          Crear cuenta
+          {t("form.registerButton")}
         </button>
       </form>
     </div>

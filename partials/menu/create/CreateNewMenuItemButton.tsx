@@ -2,14 +2,17 @@
 
 import { useFetchSession } from "@/hooks/useFetchSession";
 import { CiSquarePlus } from "react-icons/ci";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { useSessionStore } from "@/stores/useSessionStore";
 import CreateNewMenuItemModal from "./CreateNewMenuItemModal";
+import { useTranslations } from "next-intl";
 
 function CreateNewMenuItemButton(props: any) {
   const { session, loading } = useSessionStore();
   const fetchSession = useFetchSession();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const t = useTranslations("MenuPage");
 
   useEffect(() => {
     fetchSession();
@@ -27,7 +30,7 @@ function CreateNewMenuItemButton(props: any) {
         onClick={() => setIsModalOpen(!isModalOpen)}
       >
         <CiSquarePlus className="inline text-4xl" />
-        Agregar nuevo
+        {t("createNewItemButton")}
       </button>
 
       {isModalOpen && <CreateNewMenuItemModal onClose={handleModalToggle} />}

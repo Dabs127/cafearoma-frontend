@@ -1,6 +1,7 @@
 "use client";
 
 import ContactMap from "@/partials/contact/ContactMap";
+import { useTranslations } from "next-intl";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 type Inputs = {
@@ -16,6 +17,8 @@ export default function Contact() {
     formState: { errors },
   } = useForm<Inputs>();
 
+  const t = useTranslations("ContactPage");
+
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     console.log(data);
   };
@@ -25,13 +28,13 @@ export default function Contact() {
       <section className="w-full text-secondary flex justify-between mb-20">
         <div className="w-2/5 flex flex-col items-start justify-start">
           <h1 className="text-3xl">
-            ¡Comunicate con nosotros si quieres algún servicio especial!
+            {t("title")}
           </h1>
           <h2 className="text-2xl my-5">
-            ¡O mandanos un correo y nosotros nos comunicaremos contigo!
+            {t("description")}
           </h2>
-          <p>Correo: cafeAroma@outlook.com</p>
-          <p>Teléfono: +52 8117669574</p>
+          <p>{t("email")}</p>
+          <p>{t("phone")}</p>
         </div>
         <div className="w-2/5 flex flex-col items-center justify-center">
           <form
@@ -40,7 +43,7 @@ export default function Contact() {
           >
             <input
               className="w-full border-b-2 border-b-text-muted p-2"
-              placeholder="Nombre"
+              placeholder={t("form.name")}
               {...register("name", { required: true })}
             />
             {errors.name && (
@@ -48,7 +51,7 @@ export default function Contact() {
             )}
             <input
               className="w-full border-b-2 border-b-text-muted p-2"
-              placeholder="Correo eléctronico"
+              placeholder={t("form.email")}
               {...register("email", { required: true })}
             />
             {errors.email && (
@@ -56,7 +59,7 @@ export default function Contact() {
             )}
             <textarea
               className="w-full border-2 rounded-2xl p-2 border-text-muted"
-              placeholder="Mensaje"
+              placeholder={t("form.message")}
               rows={8}
               {...register("message", { required: true })}
             />
@@ -68,7 +71,7 @@ export default function Contact() {
               type="submit"
               className="w-1/4 p-4 rounded-xl font-semibold bg-accent text-white cursor-pointer hover:scale-105 hover:shadow-lg transition-all duration-300"
             >
-              Enviar
+              {t("form.submitButton")}
             </button>
           </form>
         </div>

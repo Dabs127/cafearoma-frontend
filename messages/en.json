@@ -1,0 +1,166 @@
+{
+  "Navbar": {
+    "home": "Home",
+    "menu": "Menu",
+    "promotions": "Promotions",
+    "contact": "Contact",
+    "login": "Join"
+  },
+  "Footer": {
+    "Days": {
+      "Monday": "Mon",
+      "Tuesday": "Tue",
+      "Wednesday": "Wed",
+      "Thursday": "Thu",
+      "Friday": "Fri",
+      "Saturday": "Sat",
+      "Sunday": "Sun"
+    },
+    "Closed": "Closed",
+    "PrivacyPolicy": "Privacy Policy"
+  },
+  "SettingsModal": {
+    "title": "Settings",
+    "subtitlePersonalInfo": "Personal Information",
+    "form": {
+      "labelName": "Name",
+      "inputName": "Enter your full name",
+      "labelPhone": "Phone",
+      "inputPhone": "Enter your phone number",
+      "labelEmail": "Email",
+      "inputEmail": "Enter your email address",
+      "submitButton": "Save"
+    },
+    "accountConfiguration": "Account Settings",
+    "logout": "Log Out",
+    "deleteAccount": "Delete Account"
+  },
+  "HomePage": {
+    "heroDescription": "Since 2023 we have been satisfying more than 1,000 customers with our domestic and home roasted coffee. We have a diverse variety of beverages and desserts.",
+    "seeMenu": "See Menu",
+    "image1Description": "100% Arabica coffee Medium Roast",
+    "image2Description": "Freshly baked bread with fresh ingredients",
+    "image3Description": "Iced coffee with whipped cream"
+  },
+  "MenuPage": {
+    "title": "Menu",
+    "description": "Explore our beverages and food",
+    "categories": {
+      "all": "All",
+      "coffee": "Coffee",
+      "breakfast": "Breakfast",
+      "lunch": "Lunch",
+      "desserts": "Desserts",
+      "juices": "Juices"
+    },
+    "createNewItemButton": "Add New",
+    "noItemsFound": "No items found.",
+    "newMenuItemModal": {
+      "modalTitle": "New Item",
+      "name": "Enter the name of the dish",
+      "price": "Enter the price of the dish",
+      "category": "Dish category is invalid",
+      "description": "Enter the description of the dish",
+      "image": "Upload product image",
+      "preview": "Preview: ",
+      "submitButton": "Save",
+      "categoryOptions": {
+        "coffe": "Coffes",
+        "dessert": "Desserts",
+        "breakfast": "Breakfasts",
+        "lunch": "Lunch",
+        "juice": "Juices"
+      }
+    },
+    "createNewMenuItemFormValidation": {
+      "nameRequired": "Name is required.",
+      "priceInvalidType": "Price is required and must be a positive number.",
+      "pricePositive": "Price must be a positive number.",
+      "priceRequired": "Price is required.",
+      "categoryInvalid": "Category is required and must be one of the following: coffee, breakfast, lunch, desserts, juices.",
+      "descriptionRequired": "Description is required.",
+      "imageRequired": "Image is required.",
+      "imageMaxSize": "The maximum image size is 5 MB.",
+      "imageInvalidType": "Image must be of type JPEG, PNG, WEBP, or JPG."
+    }
+  },
+  "PromotionsPage": {
+    "title": "Take Advantage!",
+    "description": "Welcome to the promotions section",
+    "createNewPromotionButton": "Add New",
+    "noPromotionsFound": "No promotions found.",
+    "newPromotionModal": {
+      "modalTitle": "New Promotion",
+      "title": "Enter the promotion title",
+      "shortDescription": "Enter a short description of the promotion",
+      "longDescription": "Enter a detailed and specific description of the promotion",
+      "startDate": "Promotion start date",
+      "endDate": "Promotion end date",
+      "authenticationRequired": "Does the user need to be logged in to use the promotion?",
+      "image": "Upload promotion image",
+      "submitButton": "Save",
+      "preview": "Preview: "
+    },
+    "createNewPromotionFormValidation": {
+      "endDateRequired": "Invalid date.",
+      "longDescriptionRequired": "Long description is required.",
+      "shortDescriptionRequired": "Short description is required.",
+      "startDateRequired": "Invalid date.",
+      "titleRequired": "Title is required.",
+      "imageRequired": "Image is required.",
+      "imageMaxSize": "The maximum image size is 5 MB.",
+      "imageInvalidType": "Image must be of type JPEG, PNG, WEBP, or JPG."
+    }
+  },
+  "ContactPage": {
+    "title": "Contact us if you want any special service!",
+    "description": "Or send us an email and we will get back to you!",
+    "email": "Email: cafeAroma@outlook.com",
+    "phone": "Phone: +52 8117669574",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "submitButton": "Send"
+    },
+    "successMessage": "Thank you for your message! We will get in touch with you soon."
+  },
+  "AuthLayout": {
+    "titleLogin": "Login",
+    "titleRegister": "Register",
+    "backHome": "Back to home"
+  },
+  "LoginPage": {
+    "form": {
+      "email": "Email",
+      "password": "Password",
+      "loginButton": "Login"
+    },
+    "forgotPassword": "Forgot your password?",
+    "formValidation": {
+      "invalidEmail": "Invalid email",
+      "minPasswordLength": "Password must be at least 6 characters long"
+    }
+  },
+  "RegisterPage": {
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "phone": "Phone (optional)",
+      "registerButton": "Create Account",
+      "AcceptingTerms": "By registering, you agree to our",
+      "termsAndConditions": "Terms and Conditions"
+    },
+    "formValidation": {
+      "fullNameRequired": "Full name is required",
+      "emailRequired": "Email is required",
+      "invalidEmail": "Invalid email",
+      "minPasswordLength": "Password must be at least 6 characters long",
+      "confirmPasswordRequired": "Password confirmation is required",
+      "matchingPasswords": "Passwords do not match"
+    },
+    "successMessage": "Registration successful! You can now log in."
+  }
+}

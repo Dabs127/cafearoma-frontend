@@ -10,14 +10,13 @@ export default function PromotionsSection() {
   useEffect(() => {
     const fetchPromotions = async () => {
       const { promotions } = await getAllPromotions();
-      console.log("Promociones: ", promotions)
       setPromotions(promotions);
     };
     fetchPromotions();
   }, []);
 
   return (
-    <div className="w-full h-full flex-col items-center justify-center grid grid-cols-2 gap-15 p-20">
+    <div className="w-full h-full flex-col items-center justify-center grid grid-cols-2 gap-15 px-40">
       {promotions.map((promotion) => {
         return <PromotionCard key={promotion._id} promotion={promotion} />;
       })}

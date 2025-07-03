@@ -1,8 +1,11 @@
+"use server";
+
 import CoffeShopPicture from "@/public/coffeShop.jpg";
 import Carousel from "@/components/Carousel";
 import Latte from "@/public/cafe.png";
 import Sandwich from "@/public/sandwich.png";
 import Frappe from "@/public/frappe.png";
+import { getTranslations } from "next-intl/server";
 
 const slides = [
   {
@@ -25,7 +28,14 @@ const slides = [
   },
 ];
 
-export default function ShowProducts() {
+export default async function ShowProducts() {
+
+  const t = await getTranslations("HomePage");
+
+  slides[0].description = t("image1Description");
+  slides[1].description = t("image2Description");
+  slides[2].description = t("image3Description");
+
   return (
     <section>
       <div

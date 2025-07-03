@@ -5,11 +5,15 @@ import { CiSquarePlus } from "react-icons/ci";
 import { useEffect, useState } from "react";
 import { useSessionStore } from "@/stores/useSessionStore";
 import CreateNewPromotionModal from "./CreateNewPromotionModal";
+import { useTranslations } from "next-intl";
 
 function CreateNewPromotionButton(props: any) {
   const { session, loading } = useSessionStore();
   const fetchSession = useFetchSession();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const t = useTranslations("PromotionsPage");
+
 
   useEffect(() => {
     fetchSession();
@@ -27,7 +31,7 @@ function CreateNewPromotionButton(props: any) {
         onClick={() => setIsModalOpen(!isModalOpen)}
       >
         <CiSquarePlus className="inline text-4xl" />
-        Agregar nuevo
+        {t("createNewPromotionButton")}
       </button>
 
       {isModalOpen && <CreateNewPromotionModal onClose={handleModalToggle} />}
