@@ -3,7 +3,6 @@
 import { ItemResponse } from "@/types/items";
 import { api } from "../api";
 import { cookies, headers } from "next/headers";
-import { Cookie } from "next/font/google";
 
 export const getAllItems = async (): Promise<ItemResponse> => {
   return await api.get<ItemResponse>("/items", {});

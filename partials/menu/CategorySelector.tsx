@@ -1,6 +1,7 @@
 "use client";
 
 import useItemFilterStore from "@/stores/useItemFilterStore";
+import { useTranslations } from "next-intl";
 import { LuCoffee, LuCakeSlice, LuEggFried, LuSandwich } from "react-icons/lu";
 import { PiOrange } from "react-icons/pi";
 
@@ -14,9 +15,16 @@ const categories = [
 
 export default function CategorySelector() {
   const { itemFilter, setItemFilter } = useItemFilterStore();
+  const t = useTranslations("MenuPage");
+
+  categories[0].name = t("categories.coffee");
+  categories[1].name = t("categories.desserts");
+  categories[2].name = t("categories.breakfast");
+  categories[3].name = t("categories.lunch");
+  categories[4].name = t("categories.juices");
 
   return (
-    <div className="w-full mb-10">
+    <div className="w-full">
       <ul className="flex">
         {
             categories.map((category) => {

@@ -34,3 +34,35 @@ export interface UserLoginResponse {
         message?: string;
     }
 }
+
+export interface UserProfileResponse {
+    user: {
+        _id: string;
+        email: string;
+        password: string;
+        username: string;
+        phone: string;
+        role: string;
+    }
+}
+
+export interface UserUpdateBody extends Record<string, unknown> {
+    name?: string;
+    phone?: string;
+    email?: string;
+}
+
+export interface UserUpdateResponse {
+    success: boolean;
+    message: string;
+}
+
+export interface UserDeleteResponse {
+    success: boolean;
+    message: string;
+}
+
+export interface UserLogoutResponse {
+    success: boolean;
+    message: string;
+}

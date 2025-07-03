@@ -4,30 +4,33 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { IoClose } from "react-icons/io5";
 import { useState } from "react";
-import { CreateNewMenuItemFormSchema } from "@/schemas/menuItem/CreateNewMenuItemFormSchema"; // Asegúrate de importar tu schema
+import { CreateNewMenuItemValues, getCreateNewMenuItemFormSchema } from "@/schemas/menuItem/CreateNewMenuItemFormSchema"; // Asegúrate de importar tu schema
 import { getAllItems, postItem } from "@/actions/items/itemsActions";
-import { ItemPostFields } from "@/types/items";
 import useItemsStore from "@/stores/useItemsStore";
+import { useTranslations } from "next-intl";
 
 type Props = {
   onClose: () => void;
 };
 
 const CreateNewMenuItemModal = (props: Props) => {
+  const validationMessages = useTranslations("MenuPage.createNewMenuItemFormValidation");
   const {
     register,
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    resolver: zodResolver(CreateNewMenuItemFormSchema),
+  } = useForm<CreateNewMenuItemValues>({
+    resolver: zodResolver(getCreateNewMenuItemFormSchema(validationMessages)),
   });
+
+  const t = useTranslations("MenuPage.newMenuItemModal")
 
   const { setItems } = useItemsStore();
 
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
-  const onSubmit = async (data: ItemPostFields) => {
+  const onSubmit = async (data: CreateNewMenuItemValues) => {
     const formData = new FormData();
     for (const [key, value] of Object.entries(data)) {
       if (value instanceof File) {
@@ -54,7 +57,7 @@ const CreateNewMenuItemModal = (props: Props) => {
             onClick={props.onClose}
           />
         </p>
-        <h2 className="text-2xl text-accent font-semibold mb-4">Nuevo Item</h2>
+        <h2 className="text-2xl text-accent font-semibold mb-4">{t("modalTitle")}</h2>
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="w-full flex flex-col gap-2 items-end"
@@ -66,7 +69,7 @@ const CreateNewMenuItemModal = (props: Props) => {
                 ? "border border-red-500"
                 : "border-text-muted"
             } bg-white rounded-md `}
-            placeholder="Ingrese el nombre del platillo"
+            placeholder={t("name")}
             {...register("name")}
           />
           <p className="min-w-full min-h-4 text-red-500">
@@ -80,7 +83,7 @@ const CreateNewMenuItemModal = (props: Props) => {
                 ? "border border-red-500"
                 : "border-text-muted"
             } bg-white rounded-md `}
-            placeholder="Ingrese el precio del platillo"
+            placeholder={t("price")}
             {...register("price")}
           />
           <p className="min-w-full min-h-4 text-red-500">
@@ -96,11 +99,11 @@ const CreateNewMenuItemModal = (props: Props) => {
             } bg-white rounded-md `}
             {...register("category")}
           >
-            <option value="cafes">Cáfes</option>
-            <option value="postres">Postres</option>
-            <option value="desayunos">Desayunos</option>
-            <option value="comida">Comida</option>
-            <option value="jugos">Jugos</option>
+            <option value="cafes">{t("categoryOptions.coffe")}</option>
+            <option value="postres">{t("categoryOptions.dessert")}</option>
+            <option value="desayunos">{t("categoryOptions.breakfast")}</option>
+            <option value="comida">{t("categoryOptions.lunch")}</option>
+            <option value="jugos">{t("categoryOptions.juice")}</option>
           </select>
 
           <p className="min-w-full min-h-4 text-red-500">
@@ -113,7 +116,7 @@ const CreateNewMenuItemModal = (props: Props) => {
                 ? "border border-red-500"
                 : "border-text-muted"
             } bg-white rounded resize-none `}
-            placeholder="Ingrese la descripción del platillo"
+            placeholder={t("description")}
             rows={6}
             {...register("description")}
           ></textarea>
@@ -122,7 +125,7 @@ const CreateNewMenuItemModal = (props: Props) => {
           </p>
 
           <label className="w-full block text-lg font-medium text-gray-500">
-            Subir imagen del platillo
+            {t("image")}
           </label>
 
           <Controller
@@ -158,7 +161,7 @@ const CreateNewMenuItemModal = (props: Props) => {
 
           {imagePreview && (
             <div className="w-full mt-2">
-              <p className="text-sm text-gray-500 mb-1">Vista previa:</p>
+              <p className="text-sm text-gray-500 mb-1">{t("preview")}</p>
               <div className="w-32 h-32 border border-gray-300 rounded overflow-hidden">
                 <img
                   src={imagePreview}
@@ -173,7 +176,7 @@ const CreateNewMenuItemModal = (props: Props) => {
             type="submit"
             className="w-1/2 bg-accent text-white text-xl font-semibold mt-5 p-2 rounded cursor-pointer hover:bg-green-700 transition-colors duration-300"
           >
-            Guardar
+            {t("submitButton")}
           </button>
         </form>
       </div>

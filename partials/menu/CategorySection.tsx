@@ -5,6 +5,7 @@ import MenuItemCard from "@/components/MenuItemCard";
 import { getAllItems } from "@/actions/items/itemsActions";
 import useItemFilterStore from "@/stores/useItemFilterStore";
 import useItemsStore from "@/stores/useItemsStore";
+import { useTranslations } from "next-intl";
 
 const categories = [
   { name: "cafes" },
@@ -14,9 +15,18 @@ const categories = [
   { name: "jugos" },
 ];
 
+const categoryTranslationKeys: Record<string, string> = {
+  cafes: "coffee",
+  postres: "desserts",
+  desayunos: "breakfast",
+  comida: "lunch",
+  jugos: "juices",
+};
+
 export default function CategorySection() {
   const { itemFilter } = useItemFilterStore();
   const { items, setItems } = useItemsStore();
+  const t = useTranslations("MenuPage");
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -42,7 +52,7 @@ export default function CategorySection() {
           filteredItems.length > 0 && (
             <div key={category.name} className="w-full h-full">
               <h2 className="w-full h-13 mt-10 pl-10 font-semibold text-secondary text-4xl border-b-4 border-secondary">
-                {category.name.toUpperCase()}
+                {t(`categories.${categoryTranslationKeys[category.name]}`)}
               </h2>
               <div className="grid grid-cols-3 gap-15 w-full h-full justify-center p-20">
                 {filteredItems.map((item) => (
