@@ -14,7 +14,7 @@ export const categories = [
   "jugos",
 ] as const;
 
-export function getCreateNewMenuItemFormSchema(t?: (key: string) => string) {
+export function getUpdateMenuItemFormSchema(t?: (key: string) => string) {
   return z.object({
     name: z
       .string()
@@ -48,10 +48,10 @@ export function getCreateNewMenuItemFormSchema(t?: (key: string) => string) {
         message: t
           ? t("imageInvalidType")
           : "Formato de imagen no soportado (solo JPEG, PNG, WEBP, JPG)",
-      }),
+      }).optional(),
   });
 }
 
-export type CreateNewMenuItemValues = z.output<
-  ReturnType<typeof getCreateNewMenuItemFormSchema>
+export type UpdateMenuItemValues = z.output<
+  ReturnType<typeof getUpdateMenuItemFormSchema>
 >;
