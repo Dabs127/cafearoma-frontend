@@ -22,6 +22,10 @@ function CreateNewMenuItemButton(props: any) {
     setIsModalOpen(!isModalOpen);
   }
 
+  if(loading){
+    return <div className="w-1 h-9" />
+  }
+
   // If the user is not an administrator, do not render the button
   return !loading && session?.role === "Administrator" ? (
     <>

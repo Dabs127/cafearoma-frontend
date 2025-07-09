@@ -3,31 +3,43 @@ import { deleteUserProfile } from "@/actions/users/usersActions";
 type Props = {
   onClose: () => void;
   actionType: "delete" | "confirm";
-  id?: string | number;
+  action: (...args: any[]) => void | Promise<void>;
+  id?: string;
 };
 
 type ActionProps = {
   id?: string;
   onClose: () => void;
+  action: (...args: any[]) => void | Promise<void>;
+  data?: FormData
 };
 
 const actionTitles: Record<string, string> = {
   delete: "Eliminar Perfil",
+  deleteItem: "Eliminar item del menú",
   confirm: "Confirmar Acción",
 };
 
 const actionMessages: Record<string, string> = {
   delete: "Estas seguro que deseas eliminar? Esta acción no se puede deshacer.",
+  deleteItem: "Estas seguro que deseas eliminar este item? Esta acción no se puede deshacer.",
   confirm: "Are you sure you want to proceed with this action?",
 };
 const actionActions: Record<
   string,
   (props: ActionProps) => void | Promise<void>
 > = {
-  delete: async ({ id, onClose }) => {
-    console.log("Deleting user with ID:", id);
+  delete: async ({ id, onClose, action }) => {
+    console.log("Deleting item with ID:", id);
     if (id) {
-      await deleteUserProfile(id);
+      await action(id);
+    }
+    onClose();
+  },
+  update: async({onClose, action, data}) => {
+    console.log("Updating item with ID:", (data || "No hay data aqui en confirm action modal update"));
+    if (data) {
+      await action(data)
     }
     onClose();
   },
@@ -47,7 +59,7 @@ const ConfirmActionModal = (props: Props) => {
 
   const handleAction = () => {
     console.log("Handling action:", props.actionType);
-    actionHandler({ id: props.id?.toString(), onClose: props.onClose });
+    actionHandler({ id: props.id?.toString(), onClose: props.onClose, action: props.action });
   };
 
   return (
