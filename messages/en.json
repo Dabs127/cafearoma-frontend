@@ -110,6 +110,28 @@
       "imageRequired": "Image is required.",
       "imageMaxSize": "The maximum image size is 5 MB.",
       "imageInvalidType": "Image must be of type JPEG, PNG, WEBP, or JPG."
+    },
+    "updatePromotionModal": {
+      "modalTitle": "Edit Promotion",
+      "title": "Enter the promotion title",
+      "shortDescription": "Enter a short description of the promotion",
+      "longDescription": "Enter the full and detailed description of the promotion",
+      "startDate": "Promotion start date",
+      "endDate": "Promotion end date",
+      "authenticationRequired": "Is login required to take advantage of the promotion?",
+      "image": "Upload promotion image",
+      "submitButton": "Save",
+      "preview": "Preview"
+    },
+    "updatePromotionFormValidation": {
+      "endDateRequired": "Invalid date",
+      "longDescriptionRequired": "Long description is required",
+      "shortDescriptionRequired": "Short description is required",
+      "startDateRequired": "Invalid date",
+      "titleRequired": "Title is required",
+      "imageRequired": "Image is required.",
+      "imageMaxSize": "Maximum image size is 5 MB.",
+      "imageInvalidType": "Image must be JPEG, PNG, WEBP, or JPG."
     }
   },
   "ContactPage": {
