@@ -5,10 +5,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { IoClose } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import {
-  CreateNewMenuItemValues,
-  getCreateNewMenuItemFormSchema,
-} from "@/schemas/menuItem/CreateNewMenuItemFormSchema"; // Asegúrate de importar tu schema
-import {
   getAllItems,
   getItemById,
   updateItem,

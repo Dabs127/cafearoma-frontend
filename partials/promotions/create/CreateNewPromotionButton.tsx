@@ -14,13 +14,16 @@ function CreateNewPromotionButton(props: any) {
 
   const t = useTranslations("PromotionsPage");
 
-
   useEffect(() => {
     fetchSession();
   }, [fetchSession]);
 
   function handleModalToggle() {
     setIsModalOpen(!isModalOpen);
+  }
+
+  if (loading) {
+    return <div className="w-1 h-9" />;
   }
 
   // If the user is not an administrator, do not render the button

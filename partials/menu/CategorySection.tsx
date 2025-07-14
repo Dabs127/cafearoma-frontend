@@ -82,51 +82,63 @@ export default function CategorySection() {
           id={menuItemId?.toString() || ""}
         />
       )}
-      {items.length !== 0 && !isLoading
-        ? categories.map((category) => {
-            const filteredItems = items.filter(
-              (item) => item.category === category.name
-            );
+      {items.length !== 0 && !isLoading ? (
+        categories.map((category) => {
+          const filteredItems = items.filter(
+            (item) => item.category === category.name
+          );
 
-            // Filter items based on the selected itemFilter
-            if (itemFilter && itemFilter !== category.name) {
-              return null; // Skip rendering this category if the filter doesn't match
-            }
+          // Filter items based on the selected itemFilter
+          if (itemFilter && itemFilter !== category.name) {
+            return null; // Skip rendering this category if the filter doesn't match
+          }
 
-            if (filteredItems.length === 0 && itemFilter === category.name) {
-              return (
-                <div key={category.name} className="flex flex-col items-center text-text-muted p-30 mt-10">
-                  <MdNoFood className="w-20 h-20" />
-                  <span className="text-xl w-50 text-center mt-5">De momento no hay productos en esta categoría...</span>
-                </div>
-              );
-            }
-
+          if (filteredItems.length === 0 && itemFilter === category.name) {
             return (
-              filteredItems.length > 0 && (
-                <div key={category.name} className="w-full h-auto min-h-96">
-                  <h2 className="w-full h-13 mt-10 pl-10 font-semibold text-secondary text-4xl border-b-4 border-secondary">
-                    {t(`categories.${categoryTranslationKeys[category.name]}`)}
-                  </h2>
-                  <div className="grid grid-cols-3 gap-15 w-full h-full justify-center justify-items-center p-20">
-                    {filteredItems.map((item) => (
-                      <MenuItemCard
-                        key={item._id}
-                        item={item}
-                        handleOpenDeleteModal={() =>
-                          handleOpenDeleteModal(item._id)
-                        }
-                        handleOpenUpdateModal={() =>
-                          handleOpenUpdateModal(item._id)
-                        }
-                      />
-                    ))}
-                  </div>
-                </div>
-              )
+              <div
+                key={category.name}
+                className="flex flex-col items-center text-text-muted p-30 mt-10"
+              >
+                <MdNoFood className="w-20 h-20" />
+                <span className="text-xl w-50 text-center mt-5">
+                  De momento no hay productos en esta categoría...
+                </span>
+              </div>
             );
-          })
-        : "hola"}
+          }
+
+          return (
+            filteredItems.length > 0 && (
+              <div key={category.name} className="w-full h-auto min-h-96">
+                <h2 className="w-full h-13 mt-10 pl-10 font-semibold text-secondary text-4xl border-b-4 border-secondary">
+                  {t(`categories.${categoryTranslationKeys[category.name]}`)}
+                </h2>
+                <div className="grid grid-cols-3 gap-15 w-full h-full justify-center justify-items-center p-20">
+                  {filteredItems.map((item) => (
+                    <MenuItemCard
+                      key={item._id}
+                      item={item}
+                      handleOpenDeleteModal={() =>
+                        handleOpenDeleteModal(item._id)
+                      }
+                      handleOpenUpdateModal={() =>
+                        handleOpenUpdateModal(item._id)
+                      }
+                    />
+                  ))}
+                </div>
+              </div>
+            )
+          );
+        })
+      ) : (
+        <div className="flex flex-col items-center text-text-muted p-30 mt-10">
+          <MdNoFood className="w-20 h-20" />
+          <span className="text-xl w-50 text-center mt-5">
+            Agregue sus primeros productos y podra visualizarlos aqui!
+          </span>
+        </div>
+      )}
     </>
   );
 }

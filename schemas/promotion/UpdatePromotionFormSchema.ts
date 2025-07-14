@@ -7,7 +7,7 @@ const ACCEPTED_IMAGE_TYPES = [
   "image/webp",
 ];
 
-export function getCreateNewPromotionFormSchema(t?: (key: string) => string) {
+export function getUpdatePromotionFormSchema(t?: (key: string) => string) {
   return z.object({
     endDate: z.string().date(t ? t("endDateRequired"): "Fecha es Inválida"),
     longDescription: z.string().nonempty(t ? t("longDescriptionRequired") : "La descripción larga es obligatoria"),
@@ -28,10 +28,10 @@ export function getCreateNewPromotionFormSchema(t?: (key: string) => string) {
         message: t
           ? t("imageInvalidType")
           : "Formato de imagen no soportado (solo JPEG, PNG, WEBP, JPG)",
-      }),
+      }).optional(),
   });
 }
 
-export type CreateNewPromotionValues = z.output<
-  ReturnType<typeof getCreateNewPromotionFormSchema>
+export type UpdatePromotionValues = z.output<
+  ReturnType<typeof getUpdatePromotionFormSchema>
 >;
