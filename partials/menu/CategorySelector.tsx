@@ -30,8 +30,8 @@ export default function CategorySelector() {
             categories.map((category) => {
                 return (
                 <li key={category.name} className="w-full h-15 flex flex-col justify-center items-center text-lg text-accent font-semibold" onClick={() => setItemFilter(category.category)}>
-                    <span className={`text-3xl p-2 rounded-full ${category.category === itemFilter ? "text-accent" : "text-text-muted"} hover:text-accent transition-all duration-300 ease-in-out cursor-pointer`}>{category.icon}</span>
-                    <span>{category.name}</span>
+                    <span className={`text-2xl p-2 rounded-full ${category.category === itemFilter ? "text-accent" : "text-text-muted"} hover:text-accent transition-all duration-300 ease-in-out cursor-pointer md:text-4xl`}>{category.icon}</span>
+                    <span className="text-sm md:text-lg">{category.name}</span>
                 </li>
                 );
             })

@@ -25,17 +25,17 @@ export default function AuthLayout({
   };
 
   return (
-    <main className="w-full h-screen overflow-hidden flex flex-row bg-primary">
-      <div className="w-1/2 max-h-screen">
-        <Link
-          href={"/"}
-          className=" absolute top-0 right-0 m-5 flex items-center gap-x-3 group"
-        >
-          <FaArrowLeft className="h-7 w-7 z-10 text-secondary group-hover:-translate-x-2 transition-all" />
-          <span className="text-xl text-secondary font-semibold">
-            {t("backHome")}
-          </span>
-        </Link>
+    <main className="w-full h-screen overflow-hidden flex flex-col lg:flex-row bg-primary">
+      <Link
+        href={"/"}
+        className="absolute top-0 right-0 m-5 flex items-center gap-x-3 group"
+      >
+        <FaArrowLeft className="h-7 w-7 z-10 text-secondary group-hover:-translate-x-2 transition-all" />
+        <span className="text-xl text-secondary font-semibold">
+          {t("backHome")}
+        </span>
+      </Link>
+      <div className="absolute w-full h-full lg:block lg:w-1/2 lg:max-h-screen lg:static">
         <Image
           src={Woman}
           alt="Ejemplo de cliente sosteniendo producto de la cafetería"
@@ -43,15 +43,18 @@ export default function AuthLayout({
           priority
         />
       </div>
-      <div className="w-1/2 h-full flex flex-col justify-start items-center">
-        <Image
-          src={logoPic}
-          alt="Logo cafe aroma"
-          width={70}
-          className="mt-10"
-        />
+      <div className="w-full h-full flex flex-col justify-start items-center lg:w-1/2">
+        <div className="z-10">
+          <Image
+            src={logoPic}
+            alt="Logo cafe aroma"
+            width={70}
+            className="mt-10"
+          />
+        </div>
+
         <div
-          className={`w-2/4 h-auto relative flex flex-col mt-10 transition-all duration-500 ease-in-out`}
+          className={`w-[90%] h-auto relative flex flex-col mt-10 transition-all duration-500 ease-in-out sm:w-1/2`}
         >
           <div
             className={`bg-accent border-b-2 border-b-accent w-1/2 h-2/4 absolute z-0 rounded-2xl transition duration-300 ease-in-out ${

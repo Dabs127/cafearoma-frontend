@@ -19,6 +19,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Cafe Aroma",
   description: "Disfruta del mejor cafe de mi casa",
+  viewport: "width=device-width, initial-scale=1.0"
 };
 
 export default async function LocaleLayout({

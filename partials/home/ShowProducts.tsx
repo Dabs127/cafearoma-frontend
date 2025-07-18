@@ -40,7 +40,7 @@ export default async function ShowProducts() {
     <section>
       <div
         style={{ backgroundImage: `url(${CoffeShopPicture.src})` }}
-        className="object-contain max-w-full max-h-1/4 p-10 mx-10 my-20 flex justify-center items-center rounded-4xl shadow-2xl"
+        className="object-contain max-w-full max-h-1/4 p-10 mx-5 my-20 flex justify-center items-center rounded-4xl shadow-2xl"
       >
         <Carousel slides={slides} />
       </div>

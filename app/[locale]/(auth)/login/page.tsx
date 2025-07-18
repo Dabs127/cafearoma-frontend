@@ -86,7 +86,7 @@ export default function LoginPage() {
           {errors.email?.message}
         </p>
         <input
-          type="text"
+          type="password"
           className={`w-full p-2 border ${
             errors.password?.message
               ? "border border-red-500"

@@ -4,7 +4,10 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { IoClose } from "react-icons/io5";
 import { useState } from "react";
-import { CreateNewMenuItemValues, getCreateNewMenuItemFormSchema } from "@/schemas/menuItem/CreateNewMenuItemFormSchema"; // Asegúrate de importar tu schema
+import {
+  CreateNewMenuItemValues,
+  getCreateNewMenuItemFormSchema,
+} from "@/schemas/menuItem/CreateNewMenuItemFormSchema"; // Asegúrate de importar tu schema
 import { getAllItems, postItem } from "@/actions/items/itemsActions";
 import useItemsStore from "@/stores/useItemsStore";
 import { useTranslations } from "next-intl";
@@ -14,7 +17,9 @@ type Props = {
 };
 
 const CreateNewMenuItemModal = (props: Props) => {
-  const validationMessages = useTranslations("MenuPage.createNewMenuItemFormValidation");
+  const validationMessages = useTranslations(
+    "MenuPage.createNewMenuItemFormValidation"
+  );
   const {
     register,
     control,
@@ -24,7 +29,7 @@ const CreateNewMenuItemModal = (props: Props) => {
     resolver: zodResolver(getCreateNewMenuItemFormSchema(validationMessages)),
   });
 
-  const t = useTranslations("MenuPage.newMenuItemModal")
+  const t = useTranslations("MenuPage.newMenuItemModal");
 
   const { setItems } = useItemsStore();
 
@@ -50,17 +55,21 @@ const CreateNewMenuItemModal = (props: Props) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-      <div className="min-w-100 bg-white p-6 rounded-lg shadow-lg w-96">
-        <p className="w-full flex justify-end text-gray-500">
-          <IoClose
-            className="text-4xl cursor-pointer"
-            onClick={props.onClose}
-          />
-        </p>
-        <h2 className="text-2xl text-accent font-semibold mb-4">{t("modalTitle")}</h2>
+      <div className="w-[85%] max-h-[80%] overflow-y-auto bg-white rounded-lg shadow-lg md:w-132">
+        <div className="fixed flex p-4 rounded-lg bg-white w-[85%] border-b-2 border-b-gray-200 h-15 md:w-132">
+          <h2 className="w-full text-2xl text-accent font-semibold md:w-1/2">
+            {t("modalTitle")}
+          </h2>
+          <p className="w-full flex justify-end text-gray-500">
+            <IoClose
+              className="text-4xl cursor-pointer"
+              onClick={props.onClose}
+            />
+          </p>
+        </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="w-full flex flex-col gap-2 items-end"
+          className="w-full flex flex-col mt-15 p-6 gap-2 items-end"
         >
           <input
             type="text"

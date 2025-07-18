@@ -63,8 +63,8 @@ const ConfirmActionModal = (props: Props) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="bg-white p-6 relative rounded-lg shadow-lg w-132 max-h-[70vh] overflow-y-auto">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 overflow-hidden">
+      <div className="bg-white p-6 relative rounded-lg shadow-lg w-[80%] overflow-y-auto md:w-md">
         <h2 className="text-2xl font-semibold mb-4">{actionTitle}</h2>
         <p className="mb-6">{actionMessage}</p>
         <div className="flex justify-end gap-4">

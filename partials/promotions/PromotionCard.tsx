@@ -17,8 +17,8 @@ export default function PromotionCard({
   const { session, loading } = useSessionStore();
 
   return (
-    <div className="w-full h-auto min-h-120 rounded-3xl flex flex-col shadow-2xl bg-white my-10">
-      <div className="w-full h-4/9 flex justify-center items-center relative overflow-hidden rounded-t-3xl max-h-80">
+    <div className="w-full h-auto min-h-min rounded-3xl flex flex-col shadow-2xl bg-white my-10 md:min-w-min md:min-h-150 md:max-h-150">
+      <div className="w-full h-4/9 flex justify-center items-center relative overflow-hidden rounded-t-3xl">
         <img
           className="w-full h-full object-fill hover:scale-115 transition-all duration-300 ease-in-out"
           src={`${promotion.imgUrl}`}

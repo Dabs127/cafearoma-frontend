@@ -31,11 +31,13 @@ export default function PromotionsSection() {
   const handleOpenDeleteModal = (id: string) => {
     setIsDeleteConfirmActionModalOpen(!isDeleteConfirmActionModalOpen);
     setPromotionId(id);
+    document.body.style.overflow = "hidden";
   };
 
   const handleOpenUpdateModal = (id: string) => {
     setIsUpdateModalOpen(!isUpdateModalOpen);
     setPromotionId(id);
+    document.body.style.overflow = "hidden";
   };
 
   if (isLoading) return <PromotionSkeleton />;
@@ -44,7 +46,10 @@ export default function PromotionsSection() {
     <>
       {isDeleteConfirmActionModalOpen && (
         <ConfirmActionModal
-          onClose={() => setIsDeleteConfirmActionModalOpen(false)}
+          onClose={() => {
+            setIsDeleteConfirmActionModalOpen(false);
+            document.body.style.overflow = "";
+          }}
           actionType="delete"
           action={async () => {
             deletePromotion(promotionId?.toString() || "");
@@ -56,12 +61,15 @@ export default function PromotionsSection() {
       )}
       {isUpdateModalOpen && (
         <UpdatePromotionModal
-          onClose={() => setIsUpdateModalOpen(false)}
+          onClose={() => {
+            setIsUpdateModalOpen(false);
+            document.body.style.overflow = "";
+          }}
           id={promotionId?.toString() || ""}
         />
       )}
       {promotions.length !== 0 && !isLoading ? (
-        <div className="w-full h-full flex-col items-center justify-center grid grid-cols-2 gap-15 px-40">
+        <div className="w-full h-full grid grid-cols-1 items-center justify-center gap-25 md:grid-cols-2">
           {promotions.map((promotion) => {
             return (
               <PromotionCard

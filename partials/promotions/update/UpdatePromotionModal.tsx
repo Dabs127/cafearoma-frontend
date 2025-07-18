@@ -37,16 +37,18 @@ const UpdatePromotionModal = (props: Props) => {
   } = useForm<UpdatePromotionValues>({
     resolver: zodResolver(getUpdatePromotionFormSchema(validationMessages)),
     defaultValues: {
-        title: promotionInfo?.title ?? "",
-        shortDescription: promotionInfo?.shortDescription ?? "",
-        longDescription: promotionInfo?.longDescription ?? "",
-        endDate: typeof promotionInfo?.endDate === "string"
+      title: promotionInfo?.title ?? "",
+      shortDescription: promotionInfo?.shortDescription ?? "",
+      longDescription: promotionInfo?.longDescription ?? "",
+      endDate:
+        typeof promotionInfo?.endDate === "string"
           ? promotionInfo.endDate
           : new Date().toISOString().slice(0, 10),
-        startDate: typeof promotionInfo?.startDate === "string"
+      startDate:
+        typeof promotionInfo?.startDate === "string"
           ? promotionInfo.startDate
           : new Date().toISOString().slice(0, 10),
-        authenticationRequired: promotionInfo?.authenticationRequired,
+      authenticationRequired: promotionInfo?.authenticationRequired,
     },
   });
 
@@ -63,7 +65,7 @@ const UpdatePromotionModal = (props: Props) => {
         title: promotionInfo.title,
         shortDescription: promotionInfo.shortDescription,
         longDescription: promotionInfo.longDescription,
-        startDate: promotionInfo.startDate.toString().slice(0,10),
+        startDate: promotionInfo.startDate.toString().slice(0, 10),
         endDate: promotionInfo.endDate.toString().slice(0, 10),
         authenticationRequired: promotionInfo.authenticationRequired,
       });
@@ -95,19 +97,21 @@ const UpdatePromotionModal = (props: Props) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-      <div className="min-w-100 w-96 max-h-[90%] overflow-y-auto bg-white p-6 rounded-lg shadow-lg">
-        <p className="w-full flex justify-end text-gray-500">
-          <IoClose
-            className="text-4xl cursor-pointer"
-            onClick={props.onClose}
-          />
-        </p>
-        <h2 className="text-2xl text-accent font-semibold mb-4">
-          {t("modalTitle")}
-        </h2>
+      <div className=" w-[85%] h-[85%] overflow-y-auto bg-white rounded-lg shadow-lg md:w-132">
+        <div className="fixed flex justify-between items-center w-[85%] h-15 p-4 bg-white border-b-2 border-b-gray-200 md:w-132">
+          <h2 className="basis-2/3 text-2xl text-accent font-semibold">
+            {t("modalTitle")}
+          </h2>
+          <p className="basis-1/3 flex justify-end text-gray-500">
+            <IoClose
+              className="w- text-4xl cursor-pointer"
+              onClick={props.onClose}
+            />
+          </p>
+        </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="w-full flex flex-col gap-2 items-end"
+          className="w-full flex flex-col gap-2 items-end p-6 mt-20"
         >
           <input
             type="text"

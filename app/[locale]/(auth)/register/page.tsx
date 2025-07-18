@@ -53,7 +53,7 @@ export default function RegisterPage() {
           {errors.email?.message}
         </p>
         <input
-          type="text"
+          type="password"
           className={`w-full p-2 border ${ errors.password?.message ? "border border-red-500" : "border-text-muted"} bg-white rounded-md`}
           placeholder={ t("form.password") }
           {...register("password")}
@@ -62,7 +62,7 @@ export default function RegisterPage() {
           {errors.password?.message}
         </p>
         <input
-          type="text"
+          type="password"
           className={`w-full p-2 border ${ errors.confirm_password?.message ? "border border-red-500" : "border-text-muted"} bg-white rounded-md`}
           placeholder={ t("form.confirmPassword") }
           {...register("confirm_password")}

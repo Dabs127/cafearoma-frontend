@@ -20,6 +20,7 @@ function CreateNewPromotionButton(props: any) {
 
   function handleModalToggle() {
     setIsModalOpen(!isModalOpen);
+    document.body.style.overflow = "";
   }
 
   if (loading) {
@@ -31,7 +32,10 @@ function CreateNewPromotionButton(props: any) {
     <>
       <button
         className="text-secondary text-xl flex items-center gap-2 mb-5 cursor-pointer hover:text-yellow-950 transition-colors duration-300"
-        onClick={() => setIsModalOpen(!isModalOpen)}
+        onClick={() => {
+          setIsModalOpen(!isModalOpen);
+          document.body.style.overflow = "hidden";
+        }}
       >
         <CiSquarePlus className="inline text-4xl" />
         {t("createNewPromotionButton")}
