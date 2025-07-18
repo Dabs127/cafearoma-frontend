@@ -53,11 +53,15 @@ export default function CategorySection() {
   const handleOpenDeleteModal = (id: string) => {
     setIsDeleteConfirmActionModalOpen(!isDeleteConfirmActionModalOpen);
     setMenuItemId(id);
+
+    document.body.style.overflow = "hidden";
   };
 
   const handleOpenUpdateModal = (id: string) => {
     setIsUpdateModalOpen(!isUpdateModalOpen);
     setMenuItemId(id);
+
+    document.body.style.overflow = "hidden";
   };
 
   if (isLoading) return <MenuItemsSkeleton />;
@@ -66,7 +70,10 @@ export default function CategorySection() {
     <>
       {isDeleteConfirmActionModalOpen && (
         <ConfirmActionModal
-          onClose={() => setIsDeleteConfirmActionModalOpen(false)}
+          onClose={() => {
+            setIsDeleteConfirmActionModalOpen(false);
+            document.body.style.overflow = "";
+          }}
           actionType="delete"
           action={async () => {
             deleteItem(menuItemId?.toString() || "");
@@ -78,7 +85,10 @@ export default function CategorySection() {
       )}
       {isUpdateModalOpen && (
         <UpdateMenuItemModal
-          onClose={() => setIsUpdateModalOpen(false)}
+          onClose={() => {
+            setIsUpdateModalOpen(false);
+            document.body.style.overflow = "";
+          }}
           id={menuItemId?.toString() || ""}
         />
       )}
@@ -109,11 +119,11 @@ export default function CategorySection() {
 
           return (
             filteredItems.length > 0 && (
-              <div key={category.name} className="w-full h-auto min-h-96">
+              <div key={category.name} className="w-full h-auto min-h-96 mb-20">
                 <h2 className="w-full h-13 mt-10 pl-10 font-semibold text-secondary text-4xl border-b-4 border-secondary">
                   {t(`categories.${categoryTranslationKeys[category.name]}`)}
                 </h2>
-                <div className="grid grid-cols-3 gap-15 w-full h-full justify-center justify-items-center p-20">
+                <div className="grid grid-cols-1 gap-15 w-full h-full justify-center justify-items-center p-5 md:grid-cols-3 md:p-20">
                   {filteredItems.map((item) => (
                     <MenuItemCard
                       key={item._id}

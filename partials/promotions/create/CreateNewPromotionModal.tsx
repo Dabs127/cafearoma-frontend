@@ -4,7 +4,10 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { IoClose } from "react-icons/io5";
 import { useState } from "react";
-import { CreateNewPromotionValues, getCreateNewPromotionFormSchema } from "@/schemas/promotion/CreateNewPromotionFormSchema";
+import {
+  CreateNewPromotionValues,
+  getCreateNewPromotionFormSchema,
+} from "@/schemas/promotion/CreateNewPromotionFormSchema";
 import { PromotionPostFields } from "@/types/promotions";
 import {
   getAllPromotions,
@@ -18,7 +21,9 @@ type Props = {
 };
 
 const CreateNewPromotionModal = (props: Props) => {
-  const validationMessages = useTranslations("PromotionsPage.createNewPromotionFormValidation")
+  const validationMessages = useTranslations(
+    "PromotionsPage.createNewPromotionFormValidation"
+  );
   const {
     register,
     control,
@@ -28,7 +33,7 @@ const CreateNewPromotionModal = (props: Props) => {
     resolver: zodResolver(getCreateNewPromotionFormSchema(validationMessages)),
   });
 
-  const t = useTranslations("PromotionsPage.newPromotionModal")
+  const t = useTranslations("PromotionsPage.newPromotionModal");
 
   const { setPromotions } = usePromotionsStore();
 
@@ -54,19 +59,21 @@ const CreateNewPromotionModal = (props: Props) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-      <div className="min-w-100 w-96 max-h-[90%] overflow-y-auto bg-white p-6 rounded-lg shadow-lg">
-        <p className="w-full flex justify-end text-gray-500">
-          <IoClose
-            className="text-4xl cursor-pointer"
-            onClick={props.onClose}
-          />
-        </p>
-        <h2 className="text-2xl text-accent font-semibold mb-4">
-          {t("modalTitle")}
-        </h2>
+      <div className="w-[80%] h-[80%] overflow-y-auto bg-white rounded-lg shadow-lg md:w-96">
+        <div className="fixed flex p-4 w-[80%] h-20 justify-between items-center bg-white border-b-2 border-b-gray-200 md:w-96">
+          <h2 className="basis-2/3 text-2xl text-accent font-semibold mb-4">
+            {t("modalTitle")}
+          </h2>
+          <p className="basis-1/3 flex justify-end text-gray-500">
+            <IoClose
+              className="text-4xl cursor-pointer"
+              onClick={props.onClose}
+            />
+          </p>
+        </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="w-full flex flex-col gap-2 items-end"
+          className="w-full flex flex-col gap-2 items-end p-6 mt-15"
         >
           <input
             type="text"
@@ -137,10 +144,17 @@ const CreateNewPromotionModal = (props: Props) => {
             {errors.endDate?.message}
           </p>
 
-          <label htmlFor="authenticationRequired" className="w-full text-start text-gray-500">
+          <label
+            htmlFor="authenticationRequired"
+            className="w-full text-start text-gray-500"
+          >
             {t("authenticationRequired")}
           </label>
-          <input className="mr-auto w-10 h-5" type="checkbox" {...register("authenticationRequired")} />
+          <input
+            className="mr-auto w-10 h-5"
+            type="checkbox"
+            {...register("authenticationRequired")}
+          />
 
           <label className="w-full block text-lg font-medium text-gray-500">
             {t("image")}

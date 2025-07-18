@@ -36,7 +36,7 @@ const LocaleSwitcher = (props: Props) => {
         size={20}
       />
       <select
-        className="pl-10 pr-3 py-4 border border-secondary rounded-lg cursor-pointer text-gray-800"
+        className="pl-10 pr-3 py-2 border border-secondary rounded-lg cursor-pointer text-gray-800 text-sm"
         name="language"
         id="language"
         defaultValue={locale}

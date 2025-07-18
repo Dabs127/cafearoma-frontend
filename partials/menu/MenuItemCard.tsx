@@ -2,9 +2,7 @@ import Image from "next/image";
 import { Item } from "@/types/items";
 import { FaTrash } from "react-icons/fa";
 import { FaEdit } from "react-icons/fa";
-import { useEffect } from "react";
 import { useSessionStore } from "@/stores/useSessionStore";
-import { useFetchSession } from "@/hooks/useFetchSession";
 
 type MenuItemCardProps = {
   item: Item;
@@ -18,19 +16,14 @@ export default function MenuItemCard({
   handleOpenUpdateModal,
 }: MenuItemCardProps) {
   const { session, loading } = useSessionStore();
-  // const fetchSession = useFetchSession();
-
-  // useEffect(() => {
-  //   fetchSession();
-  // }, [fetchSession]);
-
+  
   return (
-    <div className="w-full h-130 max-w-xs rounded-3xl flex flex-col items-center shadow-2xl bg-white relative">
-      <div className="w-full h-4/8 flex justify-center items-center overflow-hidden rounded-t-3xl shadow-lg">
+    <div className="w-full h-auto min-h-min rounded-3xl flex flex-col items-center shadow-2xl bg-white relative">
+      <div className="w-full flex justify-center items-center overflow-hidden rounded-t-3xl shadow-lg">
         <Image
-          className="w-full h-full object-fill hover:scale-115 transition-all duration-300 ease-in-out"
-          width={500}
-          height={500}
+          className="w-full object-fill hover:scale-115 transition-all duration-300 ease-in-out"
+          width={300}
+          height={300}
           src={item.imgUrl}
           alt={`Imagen de ${item.name}`}
           priority

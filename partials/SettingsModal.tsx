@@ -1,4 +1,5 @@
 import {
+  deleteUserProfile,
   getUserProfile,
   logoutUser,
   updateUserProfile,
@@ -39,7 +40,7 @@ const SettingsModal = (props: Props) => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
 
-  const t = useTranslations("SettingsModal")
+  const t = useTranslations("SettingsModal");
 
   useEffect(() => {
     async function fetchUserProfile() {
@@ -73,24 +74,27 @@ const SettingsModal = (props: Props) => {
         <ConfirmActionModal
           onClose={() => setDeleteModalOpen(false)}
           actionType="delete"
+          action={deleteUserProfile}
           id={userId!}
         />
       )}
-      <div className="bg-white p-6 relative rounded-lg shadow-lg w-132 max-h-[70vh] overflow-y-auto">
-        <IoMdClose
-          className="absolute right-5 top-5 text-3xl cursor-pointer"
-          onClick={props.onClose}
-        />
-        <div className="flex items-center gap-x-4">
-          <FaGear className="w-10 h-10 text-2xl text-white bg-accent p-2 rounded-full" />
-          <h2 className="text-3xl font-bold text-secondary">{t("title")}</h2>
+      <div className="bg-white relative rounded-lg shadow-lg w-[90%] h-[70%] overflow-y-auto md:w-132">
+        <div className="bg-white fixed w-[90%] h-15 border-b-2 rounded-t-lg px-3 border-b-gray-200 flex justify-between items-center gap-x-4 md:w-132">
+          <div className="flex items-center space-x-3">
+            <FaGear className="w-9 h-9 text-2xl text-white bg-accent p-2 rounded-full" />
+            <h2 className="text-2xl font-bold text-secondary">{t("title")}</h2>
+          </div>
+          <IoMdClose
+            className="text-3xl cursor-pointer text-gray-400"
+            onClick={props.onClose}
+          />
         </div>
-        <div className="flex items-center gap-x-4 mb-8 mt-7">
+        <div className="flex items-center gap-x-4 mb-8 mt-7 px-6 pt-10">
           <LuUser className="w-6 h-6 text-white bg-secondary p-1 rounded-full" />
           <h3 className=" text-xl">{t("subtitlePersonalInfo")}</h3>
         </div>
         <form
-          className="flex flex-col gap-y-5 ml-10"
+          className="flex flex-col gap-y-5 ml-10 pr-2 md:pr-8"
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="flex flex-col gap-y-2">
@@ -141,19 +145,20 @@ const SettingsModal = (props: Props) => {
 
         <hr className="w-full my-7 text-gray-300" />
 
-        <div className="flex items-center gap-x-4 mb-8 mt-7">
+        <div className="flex items-center gap-x-4 mb-8 mt-7 px-6">
           <FaDoorOpen className="w-6 h-6 text-white bg-secondary p-1 rounded-full" />
           <h3 className=" text-xl">{t("accountConfiguration")}</h3>
         </div>
 
-        <button className="w-[90%] border border-gray-300 p-3 text-md text-gray-500 rounded-lg flex items-center gap-x-2 mb-5 ml-10 cursor-pointer hover:bg-gray-100 transition duration-300"
-        onClick={() => logoutUser()}
+        <button
+          className="w-[85%] border border-gray-300 p-3 mr-25 text-md text-gray-500 rounded-lg flex items-center gap-x-2 mb-5 ml-10 cursor-pointer hover:bg-gray-100 transition duration-300"
+          onClick={() => logoutUser()}
         >
           <FaDoorOpen className="w-4 h-4 text-gray-500" />
           {t("logout")}
         </button>
         <button
-          className="w-[90%] border border-red-500 p-3 text-md text-red-500 rounded-lg flex items-center gap-x-2 mb-5 ml-10 cursor-pointer hover:bg-red-100 transition duration-300"
+          className="w-[85%] border border-red-500 p-3 text-md text-red-500 rounded-lg flex items-center gap-x-2 mb-5 ml-10 cursor-pointer hover:bg-red-100 transition duration-300"
           onClick={() => setDeleteModalOpen(true)}
         >
           <FaRegTrashAlt className="w-4 h-4 text-red-500" />

@@ -24,9 +24,9 @@ export default function Contact() {
   };
 
   return (
-    <main className="w-5/6 h-full mx-auto flex flex-col items-center mt-30">
-      <section className="w-full text-secondary flex justify-between mb-20">
-        <div className="w-2/5 flex flex-col items-start justify-start">
+    <main className="w-5/6 h-full mx-auto flex flex-col items-center mt-10">
+      <section className="w-full text-secondary flex flex-col items-center text-center mb-20 md:flex md:flex-row md:justify-between md:text-left">
+        <div className="w-full flex flex-col items-center justify-start md:items-start">
           <h1 className="text-3xl">
             {t("title")}
           </h1>
@@ -36,7 +36,7 @@ export default function Contact() {
           <p>{t("email")}</p>
           <p>{t("phone")}</p>
         </div>
-        <div className="w-2/5 flex flex-col items-center justify-center">
+        <div className="w-full flex flex-col items-center justify-center mt-10">
           <form
             className="space-y-6 flex flex-col items-end w-full"
             onSubmit={handleSubmit(onSubmit)}
@@ -69,7 +69,7 @@ export default function Contact() {
 
             <button
               type="submit"
-              className="w-1/4 p-4 rounded-xl font-semibold bg-accent text-white cursor-pointer hover:scale-105 hover:shadow-lg transition-all duration-300"
+              className="w-1/2 p-4 rounded-xl font-semibold bg-accent text-white cursor-pointer hover:scale-105 hover:shadow-lg transition-all duration-300"
             >
               {t("form.submitButton")}
             </button>

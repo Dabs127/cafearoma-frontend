@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { useFetchSession } from "@/hooks/useFetchSession";
 import SettingsModal from "./SettingsModal";
 import { FaUserGear } from "react-icons/fa6";
+import { IoIosMenu } from "react-icons/io";
 import { useTranslations } from "next-intl";
 import LocaleSwitcher from "./LocaleSwitcher";
 
@@ -15,24 +16,37 @@ export default function TheNavbar() {
   const { session, loading } = useSessionStore();
   const fetchSession = useFetchSession();
   const [showSettingsModal, setShowSettingsModal] = useState(false);
+  const [navbarOpen, setNavbarOpen] = useState(false);
 
-  const t = useTranslations("Navbar")
+  const t = useTranslations("Navbar");
 
   useEffect(() => {
     fetchSession();
   }, [fetchSession]);
 
   return (
-    <nav className="w-full h-auto bg-primary p-3 flex items-center gap-10">
+    <nav className="w-full h-auto bg-primary flex justify-between p-2 gap-10 md:items-center">
       {showSettingsModal && (
         <SettingsModal
           onClose={() => {
             setShowSettingsModal(!showSettingsModal);
+            document.body.style.overflow = "";
           }}
         />
       )}
-      <Image src={logoPic} alt="Logo cafe aroma" width={60} />
-      <ul className="flex grow gap-20">
+      <Image
+        src={logoPic}
+        alt="Logo cafe aroma"
+        className="w-10 md:w-[60px]"
+        width={0}
+        sizes="100vw"
+      />
+      <ul
+        className={`w-2/4 h-full flex flex-col items-center gap-5 bg-primary fixed ${
+          navbarOpen ? "left-0" : "-left-full"
+        } top-0 grow z-10 duration-500 transition-all md:static md:flex-row md:gap-20 md:items-center`}
+      >
+        <div className="mt-5 w-1 md:hidden" />
         <li>
           <Link href="/" className="text-secondary font-semibold">
             {t("home")}
@@ -57,8 +71,18 @@ export default function TheNavbar() {
             {t("contact")}
           </Link>
         </li>
+        <li className="h-full flex flex-col justify-end pb-10 md:hidden">
+          <button
+            className="text-secondary text-4xl cursor-pointer"
+            onClick={() => {
+              setShowSettingsModal(true);
+              document.body.style.overflow = "hidden"
+            }}
+          >
+            <FaUserGear />
+          </button>
+        </li>
       </ul>
-      <LocaleSwitcher/>
       {!loading && !session ? (
         <Link
           href="/login"
@@ -67,12 +91,25 @@ export default function TheNavbar() {
           {t("login")}
         </Link>
       ) : (
-        <button
-          className="text-secondary text-4xl cursor-pointer"
-          onClick={() => setShowSettingsModal(true)}
-        >
-          <FaUserGear />
-        </button>
+        <div className="flex items-center space-x-5">
+          <LocaleSwitcher />
+
+          <button
+            className="text-3xl text-secondary relative cursor-pointer md:hidden"
+            onClick={() => setNavbarOpen(!navbarOpen)}
+          >
+            <IoIosMenu />
+          </button>
+          <button
+            className="text-secondary text-4xl cursor-pointer hidden md:mr-5 md:block"
+            onClick={() => {
+              setShowSettingsModal(true);
+              document.body.style.overflow = "hidden";
+            }}
+          >
+            <FaUserGear />
+          </button>
+        </div>
       )}
     </nav>
   );

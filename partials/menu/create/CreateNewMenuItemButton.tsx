@@ -20,10 +20,11 @@ function CreateNewMenuItemButton(props: any) {
 
   function handleModalToggle() {
     setIsModalOpen(!isModalOpen);
+    document.body.style.overflow = "";
   }
 
-  if(loading){
-    return <div className="w-1 h-9" />
+  if (loading) {
+    return <div className="w-1 h-9" />;
   }
 
   // If the user is not an administrator, do not render the button
@@ -31,7 +32,10 @@ function CreateNewMenuItemButton(props: any) {
     <>
       <button
         className="text-secondary text-xl flex items-center gap-2 mb-5 cursor-pointer hover:text-yellow-950 transition-colors duration-300"
-        onClick={() => setIsModalOpen(!isModalOpen)}
+        onClick={() => {
+          setIsModalOpen(!isModalOpen);
+          document.body.style.overflow = "hidden";
+        }}
       >
         <CiSquarePlus className="inline text-4xl" />
         {t("createNewItemButton")}
