@@ -1,11 +1,14 @@
 import {
   UserDeleteResponse,
+  UserForgotPasswordBody,
+  UserForgotPasswordResponse,
   UserLoginData,
   UserLoginResponse,
   UserLogoutResponse,
   UserProfileResponse,
   UserRegisterData,
   UserRegisterResponse,
+  UserResetPasswordResponse,
   UserUpdateBody,
   UserUpdateResponse,
 } from "@/types/users";
@@ -77,7 +80,6 @@ export const getUserProfile = async () => {
   try {
     const response: UserProfileResponse = await api.get("/user/profile", {});
     const userData = response.user;
-    console.log("User profile fetched:", userData);
     return { user: userData };
   } catch (err: any) {
     const errorMsg =
@@ -89,7 +91,6 @@ export const getUserProfile = async () => {
 };
 
 export const logoutUser = async () => {
-
   try {
     const response: UserLogoutResponse = await api.post(
       "/auth/logout",
@@ -98,7 +99,7 @@ export const logoutUser = async () => {
     );
     const { success, message } = response;
     if (!success) {
-      console.log("paso algo aqui")
+      console.log("paso algo aqui");
       toast.error(message, {
         richColors: true,
         position: "top-center",
@@ -106,7 +107,7 @@ export const logoutUser = async () => {
       return;
     }
 
-    localStorage.removeItem("session-store")
+    localStorage.removeItem("session-store");
 
     toast.success(message, {
       richColors: true,
@@ -176,5 +177,74 @@ export const deleteUserProfile = async (id: string | number) => {
       err.response?.data?.message || "Error del servidor. Intenta más tarde.";
     toast.error(errorMsg, { richColors: true, position: "top-center" });
     console.error(err);
+  }
+};
+
+export const forgotPassword = async (data: UserForgotPasswordBody) => {
+  try {
+    const { success, message }: UserForgotPasswordResponse = await api.post(
+      "/auth/forgot-password",
+      data,
+      {}
+    );
+
+    if (!success) {
+      toast.error(message, {
+        richColors: true,
+        position: "top-center",
+      });
+      return { success: false };
+    }
+
+    toast.success(message, {
+      richColors: true,
+      position: "top-center",
+    });
+    return { success };
+  } catch(err: any) {
+    const errorMsg =
+      err.response?.data?.message || "Error del servidor. Intenta más tarde.";
+    toast.error(errorMsg, { richColors: true, position: "top-center" });
+    console.error(err);
+    return { success: false };
+  }
+};
+
+export const resetPassword = async (
+  data: { password: string; confirm_password: string },
+  query: { id: string; token: string }
+) => {
+  try {
+    console.log("Resetting password with data:", data, "and query:", query);
+    const { success, message } = await api.post<UserResetPasswordResponse>(
+      "/auth/reset-password",
+      data,
+      {
+        params: {
+          id: query.id,
+          token: query.token.toString(), // Ensure token is a string
+        },
+      }
+    );
+
+    if (!success) {
+      toast.error(message, {
+        richColors: true,
+        position: "top-center",
+      });
+      return { success: false };
+    }
+
+    toast.success(message, {
+      richColors: true,
+      position: "top-center",
+    });
+    return { success: true };
+  } catch (err: any) {
+    const errorMsg =
+      err.response?.data?.message || "Error del servidor. Intenta más tarde.";
+    toast.error(errorMsg, { richColors: true, position: "top-center" });
+    console.error(err);
+    return { success: false };
   }
 };

@@ -8,13 +8,15 @@ import { redirect } from "next/navigation";
 import { api } from "@/actions/api";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { getLoginUserFormSchema, LoginUserValues } from "@/schemas/auth/loginSchema";
+import {
+  getLoginUserFormSchema,
+  LoginUserValues,
+} from "@/schemas/auth/loginSchema";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 export default function LoginPage() {
-  const validationMessages = useTranslations(
-    "LoginPage.formValidation"
-  );
-
+  const validationMessages = useTranslations("LoginPage.formValidation");
   const {
     register,
     handleSubmit,
@@ -23,8 +25,16 @@ export default function LoginPage() {
     resolver: zodResolver(getLoginUserFormSchema(validationMessages)),
   });
 
+  const [weAreInLoginForm, setWeAreInLoginForm] = useState<boolean>(false);
+  const pathName = usePathname();
+
   const { setSession, setLoading } = useSessionStore();
+
   const t = useTranslations("LoginPage");
+
+  const handleClick = () => {
+    setWeAreInLoginForm(!weAreInLoginForm);
+  };
 
   const onSubmit = async (data: LoginUserValues) => {
     const result = await loginUser(data);
@@ -67,7 +77,32 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="w-full h-auto bg-secondary mt-1 p-5 z-10 rounded-b-2xl">
+    <div className="w-full h-auto bg-secondary mt-1 p-5 z-10 rounded-2xl">
+      {/* <div
+        className={`bg-accent border-b-2 border-b-accent w-1/2 h-2/4 absolute z-0 rounded-2xl transition duration-300 ease-in-out ${
+          pathName === "/es/iniciar-sesion" || pathName === "/en/login"
+            ? "transform translate-x-2/2"
+            : ""
+        }`}
+      ></div> */}
+      <div className="w-full h-auto bg-secondary rounded-t-xl z-0">
+        <Link href="/register" replace prefetch={true}>
+          <button
+            className="w-1/2 h-15  text-white text-lg  cursor-pointer"
+            onClick={handleClick}
+          >
+            {t("titleRegister")}
+          </button>
+        </Link>
+        <Link href="/login" replace prefetch={true}>
+          <button
+            className="w-1/2 h-15 text-white text-lg  cursor-pointer"
+            onClick={handleClick}
+          >
+            {t("titleLogin")}
+          </button>
+        </Link>
+      </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="w-full h-auto flex flex-col justify-center "
