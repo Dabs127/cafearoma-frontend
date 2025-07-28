@@ -31,7 +31,7 @@ const post = async <T>(
     });
     return response.data;
   } catch (error) {
-    console.error("Error posting data:", error);
+    console.error("Error posting data");
     throw error;
   }
 };

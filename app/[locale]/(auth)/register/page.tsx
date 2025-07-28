@@ -3,12 +3,18 @@
 import Link from "next/link";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { getRegisterUserFormSchema, RegisterUserFormSchema, RegisterUserValues } from "@/schemas/auth/registerSchema";
+import {
+  getRegisterUserFormSchema,
+  RegisterUserFormSchema,
+  RegisterUserValues,
+} from "@/schemas/auth/registerSchema";
 import { registerUser } from "@/actions/users/usersActions";
 import { useTranslations } from "next-intl";
+import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 export default function RegisterPage() {
-  const validationMessages = useTranslations("RegisterPage.formValidation")
+  const validationMessages = useTranslations("RegisterPage.formValidation");
   const {
     register,
     handleSubmit,
@@ -18,10 +24,17 @@ export default function RegisterPage() {
   });
 
   const t = useTranslations("RegisterPage");
+  const pathName = usePathname();
+
+  const [weAreInLoginForm, setWeAreInLoginForm] = useState<boolean>(false);
+
+  const handleClick = () => {
+    setWeAreInLoginForm(!weAreInLoginForm);
+  };
 
   const onSubmit = async (data: any) => {
     try {
-      console.log("data", data);  
+      console.log("data", data);
       await registerUser(data);
     } catch {
       console.log("Something wrong happened");
@@ -29,15 +42,44 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="w-full h-auto bg-secondary mt-1 p-5 z-10 rounded-b-2xl">
+    <div className="w-full h-auto bg-secondary mt-1 p-5 z-10 rounded-2xl">
+      {/* <div
+        className={`bg-accent border-b-2 border-b-accent w-1/2 h-2/4 absolute z-0 rounded-2xl transition duration-300 ease-in-out ${
+          pathName === "/es/iniciar-sesion" || pathName === "/en/login"
+            ? "transform translate-x-2/2"
+            : ""
+        }`}
+      ></div> */}
+      <div className="w-full h-auto bg-secondary rounded-t-xl z-0">
+        <Link href="/register" replace prefetch={true}>
+          <button
+            className="w-1/2 h-15  text-white text-lg  cursor-pointer"
+            onClick={handleClick}
+          >
+            {t("titleRegister")}
+          </button>
+        </Link>
+        <Link href="/login" replace prefetch={true}>
+          <button
+            className="w-1/2 h-15 text-white text-lg  cursor-pointer"
+            onClick={handleClick}
+          >
+            {t("titleLogin")}
+          </button>
+        </Link>
+      </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="w-full h-auto space-y-2 flex flex-col justify-center "
       >
         <input
           type="text"
-          className={`w-full p-2 border ${ errors.username?.message ? "border border-red-500" : "border-text-muted"} bg-white rounded-md`}
-          placeholder={ t("form.name") }
+          className={`w-full p-2 border ${
+            errors.username?.message
+              ? "border border-red-500"
+              : "border-text-muted"
+          } bg-white rounded-md`}
+          placeholder={t("form.name")}
           {...register("username")}
         />
         <p className="min-w-full min-h-5 text-red-500">
@@ -45,8 +87,12 @@ export default function RegisterPage() {
         </p>
         <input
           type="text"
-          className={`w-full p-2 border ${ errors.email?.message ? "border border-red-500" : "border-text-muted"} bg-white rounded-md`}
-          placeholder={ t("form.email") }
+          className={`w-full p-2 border ${
+            errors.email?.message
+              ? "border border-red-500"
+              : "border-text-muted"
+          } bg-white rounded-md`}
+          placeholder={t("form.email")}
           {...register("email")}
         />
         <p className="min-w-full min-h-5 text-red-500">
@@ -54,8 +100,12 @@ export default function RegisterPage() {
         </p>
         <input
           type="password"
-          className={`w-full p-2 border ${ errors.password?.message ? "border border-red-500" : "border-text-muted"} bg-white rounded-md`}
-          placeholder={ t("form.password") }
+          className={`w-full p-2 border ${
+            errors.password?.message
+              ? "border border-red-500"
+              : "border-text-muted"
+          } bg-white rounded-md`}
+          placeholder={t("form.password")}
           {...register("password")}
         />
         <p className="min-w-full min-h-5 text-red-500">
@@ -63,8 +113,12 @@ export default function RegisterPage() {
         </p>
         <input
           type="password"
-          className={`w-full p-2 border ${ errors.confirm_password?.message ? "border border-red-500" : "border-text-muted"} bg-white rounded-md`}
-          placeholder={ t("form.confirmPassword") }
+          className={`w-full p-2 border ${
+            errors.confirm_password?.message
+              ? "border border-red-500"
+              : "border-text-muted"
+          } bg-white rounded-md`}
+          placeholder={t("form.confirmPassword")}
           {...register("confirm_password")}
         />
         <p className="min-w-full min-h-5 text-red-500">
@@ -72,8 +126,12 @@ export default function RegisterPage() {
         </p>
         <input
           type="text"
-          className={`"w-full p-2 border ${ errors.phone?.message ? "border border-red-500" : "border-text-muted"} bg-white rounded-md`}
-          placeholder={ t("form.phone") }
+          className={`"w-full p-2 border ${
+            errors.phone?.message
+              ? "border border-red-500"
+              : "border-text-muted"
+          } bg-white rounded-md`}
+          placeholder={t("form.phone")}
           {...register("phone")}
         />
         <p className="min-w-full min-h-5 text-red-500">
@@ -85,7 +143,10 @@ export default function RegisterPage() {
             {t("form.termsAndConditions")}
           </Link>
         </p>
-        <button type="submit" className="p-4 rounded-2xl bg-accent text-white cursor-pointer">
+        <button
+          type="submit"
+          className="p-4 rounded-2xl bg-accent text-white cursor-pointer"
+        >
           {t("form.registerButton")}
         </button>
       </form>

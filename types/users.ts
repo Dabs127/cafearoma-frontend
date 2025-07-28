@@ -52,6 +52,15 @@ export interface UserUpdateBody extends Record<string, unknown> {
     email?: string;
 }
 
+export interface UserForgotPasswordBody extends Record<string, unknown> {
+    email: string;
+}
+
+export interface UserResetPasswordBody extends Record<string, unknown> {
+    password: string;
+    confirm_password: string;
+}
+
 export interface UserUpdateResponse {
     success: boolean;
     message: string;
@@ -63,6 +72,16 @@ export interface UserDeleteResponse {
 }
 
 export interface UserLogoutResponse {
+    success: boolean;
+    message: string;
+}
+
+export interface UserForgotPasswordResponse {
+    success: boolean;
+    message: string;
+}
+
+export interface UserResetPasswordResponse {
     success: boolean;
     message: string;
 }

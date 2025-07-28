@@ -148,12 +148,12 @@
     "successMessage": "¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto."
   },
   "AuthLayout": {
-    "titleLogin": "Iniciar Sesión",
-    "titleRegister": "Registrarse",
     "backHome": "Regresar al inicio"
   },
   "LoginPage": {
     "title": "Iniciar Sesión",
+    "titleLogin": "Iniciar Sesión",
+    "titleRegister": "Registrarse",
     "form": {
       "email": "Correo Electrónico",
       "password": "Contraseña",
@@ -166,6 +166,8 @@
     }
   },
   "RegisterPage": {
+    "titleLogin": "Iniciar Sesión",
+    "titleRegister": "Registrarse",
     "title": "Registrarse",
     "form": {
       "name": "Nombre",
@@ -186,5 +188,30 @@
       "matchingPasswords": "Las contraseñas no coinciden"
     },
     "successMessage": "¡Registro exitoso! Ahora puedes iniciar sesión."
+  },
+  "ForgotPasswordPage": {
+    "titleForgot": "Recupera contraseña",
+    "form": {
+      "email": "Correo Electrónico",
+      "submitButton": "Enviar Correo de Recuperación"
+    },
+    "formValidation": {
+      "emailRequired": "Correo requerido",
+      "invalidEmail": "Correo inválido"
+    }
+  },
+  "ResetPasswordPage": {
+    "titleReset": "Restablecer Contraseña",
+    "form": {
+      "password": "Nueva Contraseña",
+      "confirmPassword": "Confirmar Nueva Contraseña",
+      "submitButton": "Restablecer Contraseña"
+    },
+    "formValidation": {
+      "newPasswordRequired": "Nueva contraseña requerida",
+      "minPasswordLength": "La nueva contraseña debe tener al menos 6 caracteres",
+      "confirmPasswordRequired": "Confirmación de nueva contraseña requerida",
+      "matchingPasswords": "Las contraseñas no coinciden"
+    }
   }
 }
