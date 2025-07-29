@@ -15,7 +15,7 @@ const get = async <T>(
     });
     return response.data;
   } catch (error) {
-    console.error("Error fetching data:", error);
+    console.error("Error fetching data:");
     throw error;
   }
 
@@ -46,7 +46,7 @@ const put = async <T>(
     });
     return response.data;
   } catch (error) {
-    console.error("Error putting data:", error);
+    console.error("Error putting data");
     throw error;
   }
 };

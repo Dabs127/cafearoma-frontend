@@ -61,6 +61,12 @@ export interface UserResetPasswordBody extends Record<string, unknown> {
     confirm_password: string;
 }
 
+export interface UserSendEmailToAdminBody extends Record<string, unknown> {
+    name: string;
+    email: string;
+    message: string;
+}
+
 export interface UserUpdateResponse {
     success: boolean;
     message: string;
@@ -82,6 +88,11 @@ export interface UserForgotPasswordResponse {
 }
 
 export interface UserResetPasswordResponse {
+    success: boolean;
+    message: string;
+}
+
+export interface UserSendEmailToAdminResponse {
     success: boolean;
     message: string;
 }
