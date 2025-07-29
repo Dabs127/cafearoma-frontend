@@ -145,6 +145,12 @@
       "message": "Message",
       "submitButton": "Send"
     },
+    "formValidation": {
+      "nameRequired": "Name is required.",
+      "emailRequired": "Email is required.",
+      "invalidEmail": "Invalid email.",
+      "messageRequired": "Message is required."
+    },
     "successMessage": "Thank you for your message! We will get in touch with you soon."
   },
   "AuthLayout": {

@@ -21,7 +21,7 @@ export const useFetchSession = () => {
         const res = await api.get<Session>("/auth/session", {});
         setSession(res);
       } catch (error) {
-        console.error("Error refreshing token", error);
+        console.error("Error refreshing token");
         setSession(null);
       }
     } finally {

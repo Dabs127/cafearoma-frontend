@@ -1,6 +1,12 @@
 "use client";
 
+import { sendEmailToAdmin } from "@/actions/users/usersActions";
 import ContactMap from "@/partials/contact/ContactMap";
+import {
+  ContactValues,
+  getContactFormSchema,
+} from "@/schemas/contact/ContactFormSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { useForm, SubmitHandler } from "react-hook-form";
 
@@ -11,28 +17,36 @@ type Inputs = {
 };
 
 export default function Contact() {
+  const validationMessages = useTranslations("ContactPage.formValidation");
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>();
+    reset,
+  } = useForm<ContactValues>({
+    resolver: zodResolver(getContactFormSchema(validationMessages)),
+  });
 
   const t = useTranslations("ContactPage");
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    await sendEmailToAdmin(data);
+
+    // Reset form fields after submission
+    reset({
+      name: "",
+      email: "",
+      message: "",
+    });
   };
 
   return (
     <main className="w-5/6 h-full mx-auto flex flex-col items-center mt-10">
-      <section className="w-full text-secondary flex flex-col items-center text-center mb-20 md:flex md:flex-row md:justify-between md:text-left">
+      <section className="w-full text-secondary flex flex-col gap-x-8 items-center text-center mb-20 md:flex md:flex-row md:justify-between md:text-left">
         <div className="w-full flex flex-col items-center justify-start md:items-start">
-          <h1 className="text-3xl">
-            {t("title")}
-          </h1>
-          <h2 className="text-2xl my-5">
-            {t("description")}
-          </h2>
+          <h1 className="text-3xl">{t("title")}</h1>
+          <h2 className="text-2xl my-5">{t("description")}</h2>
           <p>{t("email")}</p>
           <p>{t("phone")}</p>
         </div>
@@ -42,30 +56,38 @@ export default function Contact() {
             onSubmit={handleSubmit(onSubmit)}
           >
             <input
-              className="w-full border-b-2 border-b-text-muted p-2"
+              className={`w-full border-b-2 ${
+                errors.name ? "border-2 border-red-500" : "border-b-text-muted"
+              } p-2`}
               placeholder={t("form.name")}
-              {...register("name", { required: true })}
+              {...register("name")}
             />
-            {errors.name && (
-              <span className="text-red-500">Este campo es requerido</span>
-            )}
+            <p className="min-w-full min-h-4 text-red-500">
+              {errors.name?.message}
+            </p>
             <input
-              className="w-full border-b-2 border-b-text-muted p-2"
+              className={`w-full border-b-2 ${
+                errors.email ? "border-2 border-red-500" : "border-b-text-muted"
+              } p-2`}
               placeholder={t("form.email")}
-              {...register("email", { required: true })}
+              {...register("email")}
             />
-            {errors.email && (
-              <span className="text-red-500">Este campo es requerido</span>
-            )}
+            <p className="min-w-full min-h-4 text-red-500">
+              {errors.email?.message}
+            </p>
             <textarea
-              className="w-full border-2 rounded-2xl p-2 border-text-muted"
+              className={`w-full border-b-2 ${
+                errors.message
+                  ? "border-2 border-red-500"
+                  : "border-b-text-muted"
+              } p-2`}
               placeholder={t("form.message")}
               rows={8}
-              {...register("message", { required: true })}
+              {...register("message")}
             />
-            {errors.message && (
-              <span className="text-red-500">Este campo es requerido</span>
-            )}
+            <p className="min-w-full min-h-4 text-red-500">
+              {errors.message?.message}
+            </p>
 
             <button
               type="submit"

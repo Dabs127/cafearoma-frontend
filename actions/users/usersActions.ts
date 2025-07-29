@@ -9,6 +9,8 @@ import {
   UserRegisterData,
   UserRegisterResponse,
   UserResetPasswordResponse,
+  UserSendEmailToAdminBody,
+  UserSendEmailToAdminResponse,
   UserUpdateBody,
   UserUpdateResponse,
 } from "@/types/users";
@@ -248,3 +250,26 @@ export const resetPassword = async (
     return { success: false };
   }
 };
+
+export const sendEmailToAdmin = async (data: UserSendEmailToAdminBody) => {
+  try {
+    const {success, message} = await api.post<UserSendEmailToAdminResponse>("user/sendEmailToAdmin", data, {});
+
+    if (!success) {
+      toast.error(message, {
+        richColors: true,
+        position: "top-center",
+      });
+      return;
+    }
+
+    toast.success(message, {
+      richColors: true,
+      position: "top-center",
+    });
+  } catch (err: any) {
+    const errorMsg =
+      err.response?.data?.message || "Error del servidor. Intenta más tarde.";
+    toast.error(errorMsg, { richColors: true, position: "top-center" });
+  }
+}

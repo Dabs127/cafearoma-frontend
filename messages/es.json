@@ -145,6 +145,12 @@
       "message": "Mensaje",
       "submitButton": "Enviar"
     },
+    "formValidation": {
+      "nameRequired": "El nombre es obligatorio.",
+      "emailRequired": "El correo electrónico es obligatorio.",
+      "invalidEmail": "El correo electrónico es inválido.",
+      "messageRequired": "El mensaje es obligatorio."
+    },
     "successMessage": "¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto."
   },
   "AuthLayout": {

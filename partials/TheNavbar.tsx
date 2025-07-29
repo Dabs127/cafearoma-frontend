@@ -11,12 +11,14 @@ import { FaUserGear } from "react-icons/fa6";
 import { IoIosMenu } from "react-icons/io";
 import { useTranslations } from "next-intl";
 import LocaleSwitcher from "./LocaleSwitcher";
+import { usePathname } from "@/i18n/navigation";
 
 export default function TheNavbar() {
   const { session, loading } = useSessionStore();
   const fetchSession = useFetchSession();
   const [showSettingsModal, setShowSettingsModal] = useState(false);
   const [navbarOpen, setNavbarOpen] = useState(false);
+  const pathName = usePathname();
 
   const t = useTranslations("Navbar");
 
@@ -48,26 +50,26 @@ export default function TheNavbar() {
       >
         <div className="mt-5 w-1 md:hidden" />
         <li>
-          <Link href="/" className="text-secondary font-semibold">
+          <Link href="/" className={`${pathName === "/" ? "text-white border-b-2 border-b-white" : "text-secondary"} font-semibold`}>
             {t("home")}
           </Link>
         </li>
         <li>
           <Link
             href="/menu"
-            className="text-secondary font-semibold"
+            className={`${pathName === "/menu" ? "text-white border-b-2 border-b-white" : "text-secondary"} font-semibold`}
             prefetch={true}
           >
             {t("menu")}
           </Link>
         </li>
         <li>
-          <Link href="/promotions" className="text-secondary font-semibold">
+          <Link href="/promotions" className={`${pathName === "/promotions" ? "text-white border-b-2 border-b-white" : "text-secondary"} font-semibold`}>
             {t("promotions")}
           </Link>
         </li>
         <li>
-          <Link href="/contact" className="text-secondary font-semibold">
+          <Link href="/contact" className={`${pathName === "/contact" ? "text-white border-b-2 border-b-white" : "text-secondary"} font-semibold`}>
             {t("contact")}
           </Link>
         </li>
