@@ -10,12 +10,15 @@ import { useEffect, useState } from "react";
 import UpdatePromotionModal from "./update/UpdatePromotionModal";
 import { MdDoNotDisturbAlt } from "react-icons/md";
 import PromotionSkeleton from "./PromotionSkeleton";
+import PromotionDetailsModal from "./details/PromotionDetailsModal";
 
 export default function PromotionsSection() {
   const { promotions, setPromotions } = usePromotionsStore();
   const [isDeleteConfirmActionModalOpen, setIsDeleteConfirmActionModalOpen] =
     useState(false);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+  const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
+
   const [promotionId, setPromotionId] = useState<string | undefined>();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -36,6 +39,12 @@ export default function PromotionsSection() {
 
   const handleOpenUpdateModal = (id: string) => {
     setIsUpdateModalOpen(!isUpdateModalOpen);
+    setPromotionId(id);
+    document.body.style.overflow = "hidden";
+  };
+
+  const handleOpenPromotionDetailsModal = (id: string) => {
+    setIsDetailsModalOpen(!isDetailsModalOpen);
     setPromotionId(id);
     document.body.style.overflow = "hidden";
   };
@@ -68,6 +77,15 @@ export default function PromotionsSection() {
           id={promotionId?.toString() || ""}
         />
       )}
+      {isDetailsModalOpen && (
+        <PromotionDetailsModal
+          onClose={() => {
+            setIsDetailsModalOpen(false);
+            document.body.style.overflow = "";
+          }}
+          id={promotionId?.toString() || ""}
+        />
+      )}
       {promotions.length !== 0 && !isLoading ? (
         <div className="w-full h-full grid grid-cols-1 items-center justify-center gap-25 md:grid-cols-2">
           {promotions.map((promotion) => {
@@ -80,6 +98,9 @@ export default function PromotionsSection() {
                 }
                 handleOpenUpdateModal={() =>
                   handleOpenUpdateModal(promotion._id)
+                }
+                handleOpenDetailsModal={() =>
+                  handleOpenPromotionDetailsModal(promotion._id)
                 }
               />
             );

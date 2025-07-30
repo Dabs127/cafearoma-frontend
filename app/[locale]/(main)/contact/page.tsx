@@ -101,8 +101,7 @@ export default function Contact() {
       <ContactMap />
       <div className="mt-10 mb-40">
         <p className="text-secondary">
-          Av. Universidad 123, Ciudad Universitaria, Coyoacán, 04510 Ciudad de
-          México, CDMX
+          José María Morelos 855, Barrio Antiguo, Centro, 64000 Monterrey, N.L.
         </p>
       </div>
     </main>

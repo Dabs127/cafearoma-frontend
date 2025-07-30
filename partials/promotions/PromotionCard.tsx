@@ -1,29 +1,34 @@
 import { useSessionStore } from "@/stores/useSessionStore";
 import { Promotion } from "@/types/promotions";
-import Link from "next/link";
 import { FaEdit, FaLock, FaTrash } from "react-icons/fa";
+import Image from "next/image";
 
 type PromotionCardProps = {
   promotion: Promotion;
   handleOpenDeleteModal: () => void;
   handleOpenUpdateModal: () => void;
+  handleOpenDetailsModal: () => void;
 };
 
 export default function PromotionCard({
   promotion,
   handleOpenDeleteModal,
   handleOpenUpdateModal,
+  handleOpenDetailsModal,
 }: PromotionCardProps) {
   const { session, loading } = useSessionStore();
 
   return (
     <div className="w-full h-auto min-h-min rounded-3xl flex flex-col shadow-2xl bg-white my-10 md:min-w-min md:min-h-150 md:max-h-150">
       <div className="w-full h-4/9 flex justify-center items-center relative overflow-hidden rounded-t-3xl">
-        <img
+        <Image
+          width={800}
+          height={500}
           className="w-full h-full object-fill hover:scale-115 transition-all duration-300 ease-in-out"
           src={`${promotion.imgUrl}`}
           alt={`Image of promotion ${promotion.title}`}
         />
+        <img />
         {promotion.authenticationRequired && !session && (
           <div className="w-full h-full absolute flex justify-center items-center bg-black/80">
             <FaLock className="w-1/4 h-1/4 text-white" />
@@ -38,7 +43,7 @@ export default function PromotionCard({
           {promotion.shortDescription}
         </p>
       </div>
-      <div className="w-full h-2/9 flex justify-between items-center pr-5">
+      <div className="w-full h-2/9 flex justify-between items-center pr-5 py-2">
         {
           <div className="ml-10 flex gap-x-5">
             <button
@@ -55,13 +60,15 @@ export default function PromotionCard({
             </button>
           </div>
         }
-        <Link
-          href={`/promotions/${promotion._id}`}
-          className="text-xl text-secondary my-5 py-2 px-4 border-2 rounded-2xl border-secondary hover:bg-secondary hover:text-white transition-all duration-300 ease-in-out"
-        >
-          Ver más
-        </Link>{" "}
-        {/*Agregar el id de la promoción*/}
+        {((promotion.authenticationRequired && session) ||
+          !promotion.authenticationRequired) && (
+          <button
+            className="text-xl text-secondary py-2 px-4 border-2 rounded-2xl cursor-pointer border-secondary hover:bg-secondary hover:text-white transition-all duration-300 ease-in-out"
+            onClick={handleOpenDetailsModal}
+          >
+            Ver más
+          </button>
+        )}
       </div>
     </div>
   );
