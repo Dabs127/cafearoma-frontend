@@ -9,6 +9,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { toast } from "sonner";
 
 type Inputs = {
   name: string;
@@ -31,7 +32,20 @@ export default function Contact() {
   const t = useTranslations("ContactPage");
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    await sendEmailToAdmin(data);
+    const {success } = await sendEmailToAdmin(data);
+
+    if (!success) {
+      toast.error(t("errorMessage"), {
+        richColors: true,
+        position: "top-center",
+      });
+      return;
+    }
+
+    toast.success(t("successMessage"), {
+      richColors: true,
+      position: "top-center",
+    });
 
     // Reset form fields after submission
     reset({

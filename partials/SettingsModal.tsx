@@ -5,7 +5,9 @@ import {
   updateUserProfile,
 } from "@/actions/users/usersActions";
 import ConfirmActionModal from "@/components/ConfirmActionModal";
+import { redirect } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
+
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { CiFloppyDisk } from "react-icons/ci";
@@ -13,6 +15,7 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { FaDoorOpen, FaGear } from "react-icons/fa6";
 import { IoMdClose } from "react-icons/io";
 import { LuUser } from "react-icons/lu";
+import { toast } from "sonner";
 
 type Props = {
   onClose: () => void;
@@ -59,12 +62,25 @@ const SettingsModal = (props: Props) => {
   }, [reset]);
 
   const onSubmit = async (data: UserInputs) => {
-    console.log("Form submitted with data:", data);
-    await updateUserProfile({
+    const { success, message } = await updateUserProfile({
       name: data.name,
       phone: data.phone,
       email: data.email,
     });
+
+    if (!success) {
+      toast.error(t("errorUpdateMessage") || message, {
+        richColors: true,
+        position: "top-center",
+      });
+      return;
+    }
+
+    toast.success(t("successUpdateMessage"), {
+      richColors: true,
+      position: "top-center",
+    });
+
     props.onClose();
   };
 
@@ -72,9 +88,31 @@ const SettingsModal = (props: Props) => {
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
       {deleteModalOpen && (
         <ConfirmActionModal
+          actionTitle={t("deleteTitle")}
+          actionMessage={t("deleteMessage")}
           onClose={() => setDeleteModalOpen(false)}
           actionType="delete"
-          action={deleteUserProfile}
+          action={async () => {
+            const response = await deleteUserProfile(userId!);
+
+            if (!response.success) {
+              toast.error(t("deleteSuccessMessage") || response.message, {
+                richColors: true,
+                position: "top-center",
+              });
+              return;
+            }
+
+            toast.success(t("deleteSuccessMessage") || response.message, {
+              richColors: true,
+              position: "top-center",
+            });
+
+            props.onClose();
+            setTimeout(() => {
+              redirect({ href: "/", locale: "es" });
+            }, 1000);
+          }}
           id={userId!}
         />
       )}
@@ -152,14 +190,38 @@ const SettingsModal = (props: Props) => {
 
         <button
           className="w-[85%] border border-gray-300 p-3 mr-25 text-md text-gray-500 rounded-lg flex items-center gap-x-2 mb-5 ml-10 cursor-pointer hover:bg-gray-100 transition duration-300"
-          onClick={() => logoutUser()}
+          onClick={async () => {
+            props.onClose();
+            const response = await logoutUser();
+
+            if (!response.success) {
+              toast.error(t("errorLogoutMessage") || response.message, {
+                richColors: true,
+                position: "top-center",
+              });
+              return;
+            }
+
+            toast.success(t("successLogoutMessage"), {
+              richColors: true,
+              position: "top-center",
+            });
+
+            setTimeout(() => {
+              window.location.reload();
+
+              redirect({ href: "/", locale: "es" });
+            }, 1000);
+          }}
         >
           <FaDoorOpen className="w-4 h-4 text-gray-500" />
           {t("logout")}
         </button>
         <button
           className="w-[85%] border border-red-500 p-3 text-md text-red-500 rounded-lg flex items-center gap-x-2 mb-5 ml-10 cursor-pointer hover:bg-red-100 transition duration-300"
-          onClick={() => setDeleteModalOpen(true)}
+          onClick={() => {
+            setDeleteModalOpen(true);
+          }}
         >
           <FaRegTrashAlt className="w-4 h-4 text-red-500" />
           {t("deleteAccount")}

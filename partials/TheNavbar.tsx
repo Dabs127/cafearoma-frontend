@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import logoPic from "@/public/logoCafeAroma.png";
 import { useSessionStore } from "@/stores/useSessionStore";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useFetchSession } from "@/hooks/useFetchSession";
 import SettingsModal from "./SettingsModal";
 import { FaUserGear } from "react-icons/fa6";
@@ -12,6 +12,7 @@ import { IoIosMenu } from "react-icons/io";
 import { useTranslations } from "next-intl";
 import LocaleSwitcher from "./LocaleSwitcher";
 import { usePathname } from "@/i18n/navigation";
+import { redirect } from "next/navigation";
 
 export default function TheNavbar() {
   const { session, loading } = useSessionStore();
@@ -19,19 +20,38 @@ export default function TheNavbar() {
   const [showSettingsModal, setShowSettingsModal] = useState(false);
   const [navbarOpen, setNavbarOpen] = useState(false);
   const pathName = usePathname();
-
   const t = useTranslations("Navbar");
 
+  const sidebarRef = useRef<HTMLUListElement>(null); 
   useEffect(() => {
     fetchSession();
   }, [fetchSession]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        sidebarRef.current &&
+        !sidebarRef.current.contains(event.target as Node)
+      ) {
+        setNavbarOpen(false);
+      }
+    };
+
+    if (navbarOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [navbarOpen]);
 
   return (
     <nav className="w-full h-auto bg-primary flex justify-between p-2 gap-10 md:items-center">
       {showSettingsModal && (
         <SettingsModal
           onClose={() => {
-            setShowSettingsModal(!showSettingsModal);
+            setShowSettingsModal(false);
             document.body.style.overflow = "";
           }}
         />
@@ -39,11 +59,13 @@ export default function TheNavbar() {
       <Image
         src={logoPic}
         alt="Logo cafe aroma"
-        className="w-10 md:w-[60px]"
+        className="w-10.5 cursor-pointer md:w-[60px]"
         width={0}
         sizes="100vw"
+        onClick={() => {redirect("/")}}
       />
       <ul
+        ref={sidebarRef}
         className={`w-2/4 h-full flex flex-col items-center gap-5 bg-primary fixed ${
           navbarOpen ? "left-0" : "-left-full"
         } top-0 grow z-10 duration-500 transition-all md:static md:flex-row md:gap-20 md:items-center`}
@@ -113,7 +135,6 @@ export default function TheNavbar() {
       ) : (
         <div className="flex items-center space-x-5">
           <LocaleSwitcher />
-
           <button
             className="text-3xl text-secondary relative cursor-pointer md:hidden"
             onClick={() => setNavbarOpen(!navbarOpen)}

@@ -18,7 +18,7 @@ export default function AuthLayout({
     <main className="w-full h-screen overflow-hidden flex flex-col lg:flex-row bg-primary">
       <Link
         href={"/"}
-        className="absolute top-0 right-0 m-5 flex items-center gap-x-3 group"
+        className="absolute  m-5 flex items-center gap-x-3 group md:top-0 md:right-0"
       >
         <FaArrowLeft className="h-7 w-7 z-10 text-secondary group-hover:-translate-x-2 transition-all" />
         <span className="text-xl text-secondary font-semibold">

@@ -11,6 +11,8 @@ import UpdatePromotionModal from "./update/UpdatePromotionModal";
 import { MdDoNotDisturbAlt } from "react-icons/md";
 import PromotionSkeleton from "./PromotionSkeleton";
 import PromotionDetailsModal from "./details/PromotionDetailsModal";
+import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 export default function PromotionsSection() {
   const { promotions, setPromotions } = usePromotionsStore();
@@ -21,6 +23,7 @@ export default function PromotionsSection() {
 
   const [promotionId, setPromotionId] = useState<string | undefined>();
   const [isLoading, setIsLoading] = useState(true);
+  const t = useTranslations("PromotionsPage");
 
   useEffect(() => {
     const fetchPromotions = async () => {
@@ -59,9 +62,25 @@ export default function PromotionsSection() {
             setIsDeleteConfirmActionModalOpen(false);
             document.body.style.overflow = "";
           }}
+          actionTitle={t("deleteTitle")}
+          actionMessage={t("deleteMessage")}
           actionType="delete"
           action={async () => {
-            deletePromotion(promotionId?.toString() || "");
+            const response = await deletePromotion(
+              promotionId?.toString() || ""
+            );
+            if (!response.success) {
+              toast.error(t("deleteSuccessMessage") || response.message, {
+                richColors: true,
+                position: "top-center",
+              });
+              return;
+            }
+
+            toast.success(t("deleteSuccessMessage") || response.message, {
+              richColors: true,
+              position: "top-center",
+            });
             const { promotions } = await getAllPromotions();
             setPromotions(promotions);
           }}

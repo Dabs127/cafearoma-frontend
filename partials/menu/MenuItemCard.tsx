@@ -37,15 +37,15 @@ export default function MenuItemCard({
       {
         !loading && session?.role === "Administrator" ? <div className="absolute bottom-0 flex gap-x-15">
           <button
-            className="relative -bottom-5 border-4 border-red-700 p-2 rounded-xl bg-white"
+            className="relative -bottom-5 border-4 border-red-700 p-2 rounded-xl bg-white cursor-pointer"
             onClick={handleOpenDeleteModal}
           >
             <FaTrash className="w-7 h-7" />
           </button>
-          <button className="" onClick={handleOpenUpdateModal}>
+          <button className="cursor-pointer" onClick={handleOpenUpdateModal}>
             <FaEdit className="w-13 h-13 relative -bottom-5 border-4 border-accent p-2 rounded-xl bg-white" />
           </button>
-        </div> : <div className="w-5 h-13 bg-amber-700" />
+        </div> : <div className="w-5 h-13" />
       }
     </div>
   );

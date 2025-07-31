@@ -1,6 +1,9 @@
 import { deleteUserProfile } from "@/actions/users/usersActions";
+import { toast } from "sonner";
 
 type Props = {
+  actionTitle: string;
+  actionMessage: string;
   onClose: () => void;
   actionType: "delete" | "confirm";
   action: (...args: any[]) => void | Promise<void>;
@@ -11,20 +14,9 @@ type ActionProps = {
   id?: string;
   onClose: () => void;
   action: (...args: any[]) => void | Promise<void>;
-  data?: FormData
+  data?: FormData;
 };
 
-const actionTitles: Record<string, string> = {
-  delete: "Eliminar Perfil",
-  deleteItem: "Eliminar item del menú",
-  confirm: "Confirmar Acción",
-};
-
-const actionMessages: Record<string, string> = {
-  delete: "Estas seguro que deseas eliminar? Esta acción no se puede deshacer.",
-  deleteItem: "Estas seguro que deseas eliminar este item? Esta acción no se puede deshacer.",
-  confirm: "Are you sure you want to proceed with this action?",
-};
 const actionActions: Record<
   string,
   (props: ActionProps) => void | Promise<void>
@@ -36,10 +28,13 @@ const actionActions: Record<
     }
     onClose();
   },
-  update: async({onClose, action, data}) => {
-    console.log("Updating item with ID:", (data || "No hay data aqui en confirm action modal update"));
+  update: async ({ onClose, action, data }) => {
+    console.log(
+      "Updating item with ID:",
+      data || "No hay data aqui en confirm action modal update"
+    );
     if (data) {
-      await action(data)
+      await action(data);
     }
     onClose();
   },
@@ -50,26 +45,26 @@ const actionActions: Record<
 };
 
 const ConfirmActionModal = (props: Props) => {
-  const actionTitle = actionTitles[props.actionType] || "Confirm Action";
-
-  const actionMessage =
-    actionMessages[props.actionType] || "Are you sure you want to proceed?";
 
   const actionHandler = actionActions[props.actionType] || (() => {});
 
   const handleAction = () => {
     console.log("Handling action:", props.actionType);
-    actionHandler({ id: props.id?.toString(), onClose: props.onClose, action: props.action });
+    actionHandler({
+      id: props.id?.toString(),
+      onClose: props.onClose,
+      action: props.action,
+    });
   };
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 overflow-hidden">
       <div className="bg-white p-6 relative rounded-lg shadow-lg w-[80%] overflow-y-auto md:w-md">
-        <h2 className="text-2xl font-semibold mb-4">{actionTitle}</h2>
-        <p className="mb-6">{actionMessage}</p>
+        <h2 className="text-2xl font-semibold mb-4">{props.actionTitle}</h2>
+        <p className="mb-6">{props.actionMessage}</p>
         <div className="flex justify-end gap-4">
           <button
-            className="px-4 py-2 bg-gray-300 text-gray-800 rounded cursor-pointer hover:bg-gray-400"
+            className="px-4 py-2 text-secondary rounded cursor-pointer border border-secondary hover:bg-gray-100"
             onClick={props.onClose}
           >
             Cancelar

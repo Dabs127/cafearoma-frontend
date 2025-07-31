@@ -11,6 +11,7 @@ import {
 import { getAllItems, postItem } from "@/actions/items/itemsActions";
 import useItemsStore from "@/stores/useItemsStore";
 import { useTranslations } from "next-intl";
+import { toast } from "sonner";
 
 type Props = {
   onClose: () => void;
@@ -47,7 +48,20 @@ const CreateNewMenuItemModal = (props: Props) => {
       }
     }
     props.onClose();
-    await postItem(formData);
+    const { success } = await postItem(formData);
+
+    if (!success) {
+      toast.error(t("errorMessage") || "Fallo", {
+        richColors: true,
+        position: "top-center",
+      });
+      return;
+    }
+
+    toast.success(t("successMessage") || "Funciono", {
+      richColors: true,
+      position: "top-center",
+    });
 
     const { items } = await getAllItems();
     setItems(items);
@@ -56,7 +70,7 @@ const CreateNewMenuItemModal = (props: Props) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
       <div className="w-[85%] max-h-[80%] overflow-y-auto bg-white rounded-lg shadow-lg md:w-132">
-        <div className="fixed flex p-4 rounded-lg bg-white w-[85%] border-b-2 border-b-gray-200 h-15 md:w-132">
+        <div className="fixed flex p-4 rounded-t-lg bg-white w-[85%] border-b-2 border-b-gray-200 h-15 md:w-132">
           <h2 className="w-full text-2xl text-accent font-semibold md:w-1/2">
             {t("modalTitle")}
           </h2>
