@@ -1,0 +1,249 @@
+{
+  "Navbar": {
+    "home": "Inicio",
+    "menu": "Menú",
+    "promotions": "Promociones",
+    "contact": "Contacto",
+    "login": "Unirse"
+  },
+  "Footer": {
+    "Days": {
+      "Monday": "Lun",
+      "Tuesday": "Mar",
+      "Wednesday": "Mié",
+      "Thursday": "Jue",
+      "Friday": "Vie",
+      "Saturday": "Sáb",
+      "Sunday": "Dom"
+    },
+    "Closed": "Cerrado",
+    "PrivacyPolicy": "Aviso de Privacidad"
+  },
+  "SettingsModal": {
+    "title": "Configuración",
+    "subtitlePersonalInfo": "Información Personal",
+    "form": {
+      "labelName": "Nombre",
+      "inputName": "Ingresa tu nombre completo",
+      "labelPhone": "Teléfono",
+      "inputPhone": "Ingresa tu número de teléfono",
+      "labelEmail": "Correo Electrónico",
+      "inputEmail": "Ingresa tu correo electrónico",
+      "submitButton": "Guardar"
+    },
+    "successUpdateMessage": "¡Información actualizada exitosamente!",
+    "accountConfiguration": "Configuración de Cuenta",
+    "logout": "Cerrar Sesión",
+    "deleteAccount": "Eliminar Cuenta",
+    "deleteTitle": "Eliminar Cuenta",
+    "deleteMessage": "¿Estás seguro de que quieres eliminar tu cuenta? Esta acción no se puede deshacer.",
+    "deleteSuccessMessage": "¡Cuenta eliminada exitosamente!",
+    "deleteErrorMessage": "Error al eliminar la cuenta, por favor intenta de nuevo.",
+    "successLogoutMessage": "¡Has cerrado sesión exitosamente!",
+    "errorLogoutMessage": "Error al cerrar sesión, por favor intenta de nuevo."
+  },
+  "HomePage": {
+    "heroDescription": "Desde 2023 hemos estado complaciendo a mas de 1,000 clientes con nuestro cafe nacional y tostado en casa. Tenemos una diversa variedad de bebidas y postres.",
+    "seeMenu": "Ver Menú",
+    "image1Description": "Cafe 100% de arabica Tostado medio",
+    "image2Description": "Pan recién horneado con ingredientes frescos",
+    "image3Description": "Cafe helado con crema batida"
+  },
+  "MenuPage": {
+    "title": "Menú",
+    "description": "Conoce nuestras bebidas y alimentos",
+    "categories": {
+      "all": "Todos",
+      "coffee": "Café",
+      "breakfast": "Desayuno",
+      "lunch": "Comida",
+      "desserts": "Postres",
+      "juices": "Jugos"
+    },
+    "createNewItemButton": "Agregar Nuevo",
+    "noItemsFound": "No se encontraron elementos.",
+    "newMenuItemModal": {
+      "updateModalTitle": "Editar Item",
+      "modalTitle": "Nuevo Item",
+      "name": "Ingrese el nombre del platillo",
+      "price": "Ingrese el precio del platillo",
+      "category": "Categoría del platillo es inválida",
+      "description": "Ingrese la descripción del platillo",
+      "image": "Subir imagen del producto",
+      "preview": "Vista previa",
+      "submitButton": "Guardar",
+      "categoryOptions": {
+        "coffe": "Cáfes",
+        "dessert": "Postres",
+        "breakfast": "Desayunos",
+        "lunch": "Comida",
+        "juice": "Jugos"
+      },
+      "successMessage": "¡Item agregado exitosamente!",
+      "errorMessage": "Error al agregar el item, por favor intente de nuevo.",
+      "successUpdateMessage": "¡Item actualizado exitosamente!",
+      "errorUpdateMessage": "Error al actualizar el item, por favor intente de nuevo"
+    },
+    "createNewMenuItemFormValidation": {
+      "nameRequired": "El nombre es obligatorio.",
+      "priceInvalidType": "El precio es obligatorio y debe ser un número positivo.",
+      "pricePositive": "El precio debe ser un número positivo.",
+      "priceRequired": "El precio es obligatorio",
+      "categoryInvalid": "La categoría es obligatoria y debe ser una de las siguientes: café, desayuno, comida, postres, jugos.",
+      "descriptionRequired": "La descripción es obligatoria.",
+      "imageRequired": "La imagen es obligatoria.",
+      "imageMaxSize": "El tamaño máximo de la imagen es de 5 MB.",
+      "imageInvalidType": "El tipo de imagen debe ser JPEG, PNG, WEBP, JPG."
+    },
+    "deleteTitle": "Eliminar Item",
+    "deleteMessage": "¿Estás seguro de que quieres eliminar este item?",
+    "deleteSuccessMessage": "¡Item eliminado exitosamente!",
+    "deleteErrorMessage": "Error al eliminar el item, por favor intente de nuevo"
+  },
+  "PromotionsPage": {
+    "title": "Aprovecha!",
+    "description": "Bienvenido a la sección de promociones",
+    "createNewPromotionButton": "Agregar Nuevo",
+    "noPromotionsFound": "No se encontraron promociones.",
+    "newPromotionModal": {
+      "modalTitle": "Nueva Promoción",
+      "title": "Ingrese el título de la promoción",
+      "shortDescription": "Ingrese una descripción corta de la promoción",
+      "longDescription": "Ingrese la descripción extensa y concreta de la promoción",
+      "startDate": "Fecha de inicio de la promoción",
+      "endDate": "Fecha de fin de la promoción",
+      "authenticationRequired": "El usuario requiere estar loggeado para poder aprovechar la promoción?",
+      "image": "Subir imagen de la promoción",
+      "submitButton": "Guardar",
+      "preview": "Vista previa"
+    },
+    "createNewPromotionFormValidation": {
+      "endDateRequired": "Fecha es Inválida",
+      "longDescriptionRequired": "La descripción larga es requerida",
+      "shortDescriptionRequired": "La descripción corta es requerida",
+      "startDateRequired": "Fecha es Inválida",
+      "titleRequired": "El título es requerido",
+      "imageRequired": "La imagen es obligatoria.",
+      "imageMaxSize": "El tamaño máximo de la imagen es de 5 MB.",
+      "imageInvalidType": "El tipo de imagen debe ser JPEG, PNG, WEBP, JPG."
+    },
+    "updatePromotionModal": {
+      "modalTitle": "Editar Promoción",
+      "title": "Ingrese el título de la promoción",
+      "shortDescription": "Ingrese una descripción corta de la promoción",
+      "longDescription": "Ingrese la descripción extensa y concreta de la promoción",
+      "startDate": "Fecha de inicio de la promoción",
+      "endDate": "Fecha de fin de la promoción",
+      "authenticationRequired": "El usuario requiere estar loggeado para poder aprovechar la promoción?",
+      "image": "Subir imagen de la promoción",
+      "submitButton": "Guardar",
+      "preview": "Vista previa",
+      "successMessage": "¡Promoción actualizada exitosamente!",
+      "errorMessage": "Error al actualizar la promoción, por favor intente de nuevo."
+    },
+    "updatePromotionFormValidation": {
+      "endDateRequired": "Fecha es Inválida",
+      "longDescriptionRequired": "La descripción larga es requerida",
+      "shortDescriptionRequired": "La descripción corta es requerida",
+      "startDateRequired": "Fecha es Inválida",
+      "titleRequired": "El título es requerido",
+      "imageRequired": "La imagen es obligatoria.",
+      "imageMaxSize": "El tamaño máximo de la imagen es de 5 MB.",
+      "imageInvalidType": "El tipo de imagen debe ser JPEG, PNG, WEBP, JPG."
+    },
+    "deleteTitle": "Eliminar Promoción",
+    "deleteMessage": "¿Estás seguro de que quieres eliminar esta promoción?",
+    "deleteSuccessMessage": "¡Promoción eliminada exitosamente!",
+    "deleteErrorMessage": "Error al eliminar la promoción, por favor intente de nuevo"
+  },
+  "ContactPage": {
+    "title": "¡Comunicate con nosotros si quieres algún servicio especial!",
+    "description": "¡O mandanos un correo y nosotros nos comunicaremos contigo!",
+    "email": "Correo: cafeAroma@outlook.com",
+    "phone": "Teléfono: +52 8117669574",
+    "form": {
+      "name": "Nombre",
+      "email": "Correo Electrónico",
+      "message": "Mensaje",
+      "submitButton": "Enviar"
+    },
+    "formValidation": {
+      "nameRequired": "El nombre es obligatorio.",
+      "emailRequired": "El correo electrónico es obligatorio.",
+      "invalidEmail": "El correo electrónico es inválido.",
+      "messageRequired": "El mensaje es obligatorio."
+    },
+    "successMessage": "¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.",
+    "errorMessage": "Error al enviar el mensaje, por favor intenta de nuevo."
+  },
+  "AuthLayout": {
+    "backHome": "Regresar al inicio"
+  },
+  "LoginPage": {
+    "title": "Iniciar Sesión",
+    "titleLogin": "Iniciar Sesión",
+    "titleRegister": "Registrarse",
+    "form": {
+      "email": "Correo Electrónico",
+      "password": "Contraseña",
+      "loginButton": "Iniciar Sesión"
+    },
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "formValidation": {
+      "invalidEmail": "Correo inválido",
+      "minPasswordLength": "La contraseña debe tener al menos 6 caracteres"
+    },
+    "successLoginMessage": "¡Has iniciado sesión exitosamente!",
+    "errorLoginMessage": "Error al iniciar sesión, por favor intenta de nuevo."
+  },
+  "RegisterPage": {
+    "titleLogin": "Iniciar Sesión",
+    "titleRegister": "Registrarse",
+    "title": "Registrarse",
+    "form": {
+      "name": "Nombre",
+      "email": "Correo Electrónico",
+      "password": "Contraseña",
+      "confirmPassword": "Confirmar Contraseña",
+      "phone": "Teléfono (opcional)",
+      "registerButton": "Crear Cuenta",
+      "AcceptingTerms": "Al registrarte, aceptas nuestros",
+      "termsAndConditions": "Términos y Condiciones"
+    },
+    "formValidation": {
+      "fullNameRequired": "Nombre completo requerido",
+      "emailRequired": "Correo requerido",
+      "invalidEmail": "Correo inválido",
+      "minPasswordLength": "La contraseña debe tener al menos 6 caracteres",
+      "confirmPasswordRequired": "Confirmación requerida",
+      "matchingPasswords": "Las contraseñas no coinciden"
+    },
+    "successMessage": "¡Registro exitoso! Ahora puedes iniciar sesión.",
+    "errorMessage": "Error al registrarse, por favor intenta de nuevo."
+  },
+  "ForgotPasswordPage": {
+    "titleForgot": "Recupera contraseña",
+    "form": {
+      "email": "Correo Electrónico",
+      "submitButton": "Enviar Correo de Recuperación"
+    },
+    "formValidation": {
+      "emailRequired": "Correo requerido",
+      "invalidEmail": "Correo inválido"
+    }
+  },
+  "ResetPasswordPage": {
+    "titleReset": "Restablecer Contraseña",
+    "form": {
+      "password": "Nueva Contraseña",
+      "confirmPassword": "Confirmar Nueva Contraseña",
+      "submitButton": "Restablecer Contraseña"
+    },
+    "formValidation": {
+      "newPasswordRequired": "Nueva contraseña requerida",
+      "minPasswordLength": "La nueva contraseña debe tener al menos 6 caracteres",
+      "confirmPasswordRequired": "Confirmación de nueva contraseña requerida",
+      "matchingPasswords": "Las contraseñas no coinciden"
+    }
+  }
+}
