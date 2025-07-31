@@ -15,6 +15,7 @@ import {
 } from "@/actions/promotions/promotionsActions";
 import usePromotionsStore from "@/stores/usePromotionsStore";
 import { useTranslations } from "next-intl";
+import { toast } from "sonner";
 
 type Props = {
   onClose: () => void;
@@ -51,7 +52,20 @@ const CreateNewPromotionModal = (props: Props) => {
       }
     }
     props.onClose();
-    await postPromotion(formData);
+    const { success } = await postPromotion(formData);
+
+    if (!success) {
+      toast.error(t("errorMessage") || "Fallo", {
+        richColors: true,
+        position: "top-center",
+      });
+      return;
+    }
+
+    toast.success(t("successMessage") || "Funciono", {
+      richColors: true,
+      position: "top-center",
+    });
 
     const { promotions } = await getAllPromotions();
     setPromotions(promotions);
@@ -60,8 +74,8 @@ const CreateNewPromotionModal = (props: Props) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
       <div className="w-[80%] h-[80%] overflow-y-auto bg-white rounded-lg shadow-lg md:w-96">
-        <div className="fixed flex p-4 w-[80%] h-20 justify-between items-center bg-white border-b-2 border-b-gray-200 md:w-96">
-          <h2 className="basis-2/3 text-2xl text-accent font-semibold mb-4">
+        <div className="fixed flex px-4 w-[80%] h-20 justify-between rounded-t-lg items-center bg-white border-b-2 border-b-gray-200 md:w-96">
+          <h2 className="basis-2/3 text-2xl text-accent font-semibold">
             {t("modalTitle")}
           </h2>
           <p className="basis-1/3 flex justify-end text-gray-500">

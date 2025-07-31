@@ -47,13 +47,13 @@ export default function PromotionCard({
         {
           <div className="ml-10 flex gap-x-5">
             <button
-              className=" border-4 border-red-700 p-2 rounded-xl bg-white"
+              className=" border-4 border-red-700 p-2 rounded-xl bg-white cursor-pointer"
               onClick={handleOpenDeleteModal}
             >
               <FaTrash className="w-7 h-7" />
             </button>
             <button
-              className="border-4 border-accent p-2 rounded-xl bg-white"
+              className="border-4 border-accent p-2 rounded-xl bg-white cursor-pointer"
               onClick={handleOpenUpdateModal}
             >
               <FaEdit className="w-7 h-7" />

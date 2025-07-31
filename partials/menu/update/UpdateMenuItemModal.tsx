@@ -16,6 +16,7 @@ import {
   getUpdateMenuItemFormSchema,
   UpdateMenuItemValues,
 } from "@/schemas/menuItem/UpdateMenuItemFormSchema";
+import { toast } from "sonner";
 
 type Props = {
   onClose: () => void;
@@ -68,6 +69,7 @@ const UpdateMenuItemModal = (props: Props) => {
 
   const onSubmit = async (data: UpdateMenuItemValues) => {
     const formData = new FormData();
+
     for (const [key, value] of Object.entries(data)) {
       if (value instanceof File) {
         formData.append(key, value);
@@ -80,8 +82,22 @@ const UpdateMenuItemModal = (props: Props) => {
 
     formData.append("id", itemInfo?._id || "");
 
+    const { success, message } = await updateItem(formData);
+
+    if (!success) {
+      toast.error(t("errorUpdateMessage") || message, {
+        richColors: true,
+        position: "top-center",
+      });
+      return;
+    }
+
+    toast.success(t("successUpdateMessage") || message, {
+      richColors: true,
+      position: "top-center",
+    });
+
     props.onClose();
-    await updateItem(formData);
 
     const { items } = await getAllItems();
     setItems(items);
@@ -90,8 +106,10 @@ const UpdateMenuItemModal = (props: Props) => {
   return (
     <div className="fixed h-screen inset-0 flex items-center justify-center bg-black/50 z-50 overflow-hidden">
       <div className="bg-white rounded-lg shadow-lg w-[80%] h-[80%] overflow-y-auto md:w-132">
-        <div className="fixed flex p-4 rounded-lg bg-white w-[80%] border-b-2 border-b-gray-200 h-15 md:w-132">
-          <h2 className="text-2xl text-accent font-semibold mb-4">Editar</h2>
+        <div className="fixed flex p-4 rounded-t-lg bg-white w-[80%] border-b-2 border-b-gray-200 h-15 md:w-132">
+          <h2 className="text-2xl text-accent font-semibold mb-4 w-full">
+            {t("updateModalTitle")}
+          </h2>
           <p className="w-full flex justify-end text-gray-500">
             <IoClose
               className="text-4xl cursor-pointer"

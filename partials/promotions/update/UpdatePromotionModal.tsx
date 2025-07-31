@@ -14,6 +14,7 @@ import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { IoClose } from "react-icons/io5";
+import { toast } from "sonner";
 
 type Props = {
   onClose: () => void;
@@ -89,7 +90,20 @@ const UpdatePromotionModal = (props: Props) => {
     formData.append("id", promotionInfo?._id || "");
 
     props.onClose();
-    await updatePromotion(formData);
+    const { success, message } = await updatePromotion(formData);
+
+    if (!success) {
+      toast.error(t("errorMessage") || message, {
+        richColors: true,
+        position: "top-center",
+      });
+      return;
+    }
+
+    toast.success(t("successMessage") || message, {
+      richColors: true,
+      position: "top-center",
+    });
 
     const { promotions } = await getAllPromotions();
     setPromotions(promotions);
