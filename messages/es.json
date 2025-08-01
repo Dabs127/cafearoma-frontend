@@ -31,9 +31,16 @@
       "inputEmail": "Ingresa tu correo electrónico",
       "submitButton": "Guardar"
     },
+    "successUpdateMessage": "¡Información actualizada exitosamente!",
     "accountConfiguration": "Configuración de Cuenta",
     "logout": "Cerrar Sesión",
-    "deleteAccount": "Eliminar Cuenta"
+    "deleteAccount": "Eliminar Cuenta",
+    "deleteTitle": "Eliminar Cuenta",
+    "deleteMessage": "¿Estás seguro de que quieres eliminar tu cuenta? Esta acción no se puede deshacer.",
+    "deleteSuccessMessage": "¡Cuenta eliminada exitosamente!",
+    "deleteErrorMessage": "Error al eliminar la cuenta, por favor intenta de nuevo.",
+    "successLogoutMessage": "¡Has cerrado sesión exitosamente!",
+    "errorLogoutMessage": "Error al cerrar sesión, por favor intenta de nuevo."
   },
   "HomePage": {
     "heroDescription": "Desde 2023 hemos estado complaciendo a mas de 1,000 clientes con nuestro cafe nacional y tostado en casa. Tenemos una diversa variedad de bebidas y postres.",
@@ -56,6 +63,7 @@
     "createNewItemButton": "Agregar Nuevo",
     "noItemsFound": "No se encontraron elementos.",
     "newMenuItemModal": {
+      "updateModalTitle": "Editar Item",
       "modalTitle": "Nuevo Item",
       "name": "Ingrese el nombre del platillo",
       "price": "Ingrese el precio del platillo",
@@ -70,7 +78,11 @@
         "breakfast": "Desayunos",
         "lunch": "Comida",
         "juice": "Jugos"
-      }
+      },
+      "successMessage": "¡Item agregado exitosamente!",
+      "errorMessage": "Error al agregar el item, por favor intente de nuevo.",
+      "successUpdateMessage": "¡Item actualizado exitosamente!",
+      "errorUpdateMessage": "Error al actualizar el item, por favor intente de nuevo"
     },
     "createNewMenuItemFormValidation": {
       "nameRequired": "El nombre es obligatorio.",
@@ -82,7 +94,11 @@
       "imageRequired": "La imagen es obligatoria.",
       "imageMaxSize": "El tamaño máximo de la imagen es de 5 MB.",
       "imageInvalidType": "El tipo de imagen debe ser JPEG, PNG, WEBP, JPG."
-    }
+    },
+    "deleteTitle": "Eliminar Item",
+    "deleteMessage": "¿Estás seguro de que quieres eliminar este item?",
+    "deleteSuccessMessage": "¡Item eliminado exitosamente!",
+    "deleteErrorMessage": "Error al eliminar el item, por favor intente de nuevo"
   },
   "PromotionsPage": {
     "title": "Aprovecha!",
@@ -121,7 +137,9 @@
       "authenticationRequired": "El usuario requiere estar loggeado para poder aprovechar la promoción?",
       "image": "Subir imagen de la promoción",
       "submitButton": "Guardar",
-      "preview": "Vista previa"
+      "preview": "Vista previa",
+      "successMessage": "¡Promoción actualizada exitosamente!",
+      "errorMessage": "Error al actualizar la promoción, por favor intente de nuevo."
     },
     "updatePromotionFormValidation": {
       "endDateRequired": "Fecha es Inválida",
@@ -132,7 +150,11 @@
       "imageRequired": "La imagen es obligatoria.",
       "imageMaxSize": "El tamaño máximo de la imagen es de 5 MB.",
       "imageInvalidType": "El tipo de imagen debe ser JPEG, PNG, WEBP, JPG."
-    }
+    },
+    "deleteTitle": "Eliminar Promoción",
+    "deleteMessage": "¿Estás seguro de que quieres eliminar esta promoción?",
+    "deleteSuccessMessage": "¡Promoción eliminada exitosamente!",
+    "deleteErrorMessage": "Error al eliminar la promoción, por favor intente de nuevo"
   },
   "ContactPage": {
     "title": "¡Comunicate con nosotros si quieres algún servicio especial!",
@@ -151,7 +173,8 @@
       "invalidEmail": "El correo electrónico es inválido.",
       "messageRequired": "El mensaje es obligatorio."
     },
-    "successMessage": "¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto."
+    "successMessage": "¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.",
+    "errorMessage": "Error al enviar el mensaje, por favor intenta de nuevo."
   },
   "AuthLayout": {
     "backHome": "Regresar al inicio"
@@ -169,7 +192,9 @@
     "formValidation": {
       "invalidEmail": "Correo inválido",
       "minPasswordLength": "La contraseña debe tener al menos 6 caracteres"
-    }
+    },
+    "successLoginMessage": "¡Has iniciado sesión exitosamente!",
+    "errorLoginMessage": "Error al iniciar sesión, por favor intenta de nuevo."
   },
   "RegisterPage": {
     "titleLogin": "Iniciar Sesión",
@@ -193,7 +218,8 @@
       "confirmPasswordRequired": "Confirmación requerida",
       "matchingPasswords": "Las contraseñas no coinciden"
     },
-    "successMessage": "¡Registro exitoso! Ahora puedes iniciar sesión."
+    "successMessage": "¡Registro exitoso! Ahora puedes iniciar sesión.",
+    "errorMessage": "Error al registrarse, por favor intenta de nuevo."
   },
   "ForgotPasswordPage": {
     "titleForgot": "Recupera contraseña",

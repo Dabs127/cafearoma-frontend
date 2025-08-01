@@ -5,13 +5,15 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   getRegisterUserFormSchema,
-  RegisterUserFormSchema,
   RegisterUserValues,
 } from "@/schemas/auth/registerSchema";
 import { registerUser } from "@/actions/users/usersActions";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
+import { toast } from "sonner";
+import { redirect } from "@/i18n/navigation";
+
 
 export default function RegisterPage() {
   const validationMessages = useTranslations("RegisterPage.formValidation");
@@ -33,12 +35,22 @@ export default function RegisterPage() {
   };
 
   const onSubmit = async (data: any) => {
-    try {
-      console.log("data", data);
-      await registerUser(data);
-    } catch {
-      console.log("Something wrong happened");
+    const response = await registerUser(data);
+
+    if (!response.success) {
+      toast.error(t("errorMessage"), {
+        richColors: true,
+        position: "top-center",
+      });
+      return;
     }
+
+    toast.success(t("successMessage"), {
+      richColors: true,
+      position: "top-center",
+    });
+
+    redirect({ href: "/login", locale: pathName.split("/")[1] });
   };
 
   return (
@@ -137,12 +149,12 @@ export default function RegisterPage() {
         <p className="min-w-full min-h-5 text-red-500">
           {errors.phone?.message}
         </p>
-        <p className="text-gray-300 text-center">
+        {/* <p className="text-gray-300 text-center">
           {t("form.AcceptingTerms")}{" "}
           <Link href="#" className="underline">
             {t("form.termsAndConditions")}
           </Link>
-        </p>
+        </p> */}
         <button
           type="submit"
           className="p-4 rounded-2xl bg-accent text-white cursor-pointer"

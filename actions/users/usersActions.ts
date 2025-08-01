@@ -17,8 +17,11 @@ import {
 import { api } from "../api";
 import { redirect } from "next/navigation";
 import { toast } from "sonner";
+import { getTranslations } from "next-intl/server";
 
-export const registerUser = async (data: UserRegisterData) => {
+export const registerUser = async (
+  data: UserRegisterData
+): Promise<{ success: boolean; message: string }> => {
   try {
     const response = await api.post<UserRegisterResponse>(
       "/auth/register",
@@ -26,28 +29,16 @@ export const registerUser = async (data: UserRegisterData) => {
       {}
     );
     const { success, data: resData } = response;
-    if (!success) {
-      toast.error(resData.message, {
-        richColors: true,
-        position: "top-center",
-      });
-      return;
-    }
-    toast.success(resData.message, {
-      richColors: true,
-      position: "top-center",
-    });
-    setTimeout(() => {
-      redirect("/login");
-    }, 1500);
+
+    return { success, message: resData.message };
   } catch (err: any) {
-    const errorMsg =
-      err.response?.data?.message || "Error del servidor. Intenta más tarde.";
-    toast.error(errorMsg, {
-      richColors: true,
-      position: "top-center",
-    });
     console.error(err);
+
+    return {
+      success: false,
+      message:
+        err.response?.data?.message || "Error del servidor. Intenta más tarde.",
+    };
   }
 };
 
@@ -56,23 +47,8 @@ export const loginUser = async (data: UserLoginData) => {
     const response = await api.post<UserLoginResponse>("/auth/login", data, {});
     const { success, data: resData } = response;
 
-    if (!success) {
-      toast.error(resData.message, {
-        richColors: true,
-        position: "top-center",
-      });
-      return { success: false };
-    }
-
-    toast.success(resData.message, {
-      richColors: true,
-      position: "top-center",
-    });
-    return { success: true };
+    return { success, message: resData.message };
   } catch (err: any) {
-    const errorMsg =
-      err.response?.data?.message || "Error del servidor. Intenta más tarde.";
-    toast.error(errorMsg, { richColors: true, position: "top-center" });
     console.error(err);
     return { success: false };
   }
@@ -92,97 +68,67 @@ export const getUserProfile = async () => {
   }
 };
 
-export const logoutUser = async () => {
+export const logoutUser = async (): Promise<{
+  success: boolean;
+  message: string;
+}> => {
   try {
-    const response: UserLogoutResponse = await api.post(
+    const { success, message }: UserLogoutResponse = await api.post(
       "/auth/logout",
       { data: {} },
       {}
     );
-    const { success, message } = response;
-    if (!success) {
-      console.log("paso algo aqui");
-      toast.error(message, {
-        richColors: true,
-        position: "top-center",
-      });
-      return;
-    }
 
     localStorage.removeItem("session-store");
 
-    toast.success(message, {
-      richColors: true,
-      position: "top-center",
-    });
-    setTimeout(() => {
-      redirect("/login");
-    }, 1000);
+    return { success, message };
   } catch (err: any) {
     const errorMsg =
       err.response?.data?.message || "Error del servidor. Intenta más tarde.";
-    toast.error(errorMsg, { richColors: true, position: "top-center" });
     console.error(err);
+
+    return { success: false, message: errorMsg };
   }
 };
 
-export const updateUserProfile = async (data: UserUpdateBody) => {
+export const updateUserProfile = async (
+  data: UserUpdateBody
+): Promise<{ success: boolean; message: string }> => {
   try {
     const response: UserUpdateResponse = await api.put("/user", data, {});
     const { success, message } = response;
 
-    if (!success) {
-      toast.error(message, {
-        richColors: true,
-        position: "top-center",
-      });
-      return;
-    }
-
-    toast.success(message, {
-      richColors: true,
-      position: "top-center",
-    });
+    return { success, message };
   } catch (err: any) {
     const errorMsg =
       err.response?.data?.message || "Error del servidor. Intenta más tarde.";
-    toast.error(errorMsg, { richColors: true, position: "top-center" });
-    console.error(err);
+    return { success: false, message: errorMsg };
   }
 };
 
-export const deleteUserProfile = async (id: string | number) => {
+export const deleteUserProfile = async (
+  id: string | number
+): Promise<{ success: boolean; message: string }> => {
   console.log("Deleting user with ID:", id);
   try {
-    const response: UserDeleteResponse = await api.del("/user", {
+    const { success, message }: UserDeleteResponse = await api.del("/user", {
       data: { id },
     });
-    const { success, message } = response;
 
-    if (!success) {
-      toast.error(message, {
-        richColors: true,
-        position: "top-center",
-      });
-      return;
-    }
-
-    toast.success(message, {
-      richColors: true,
-      position: "top-center",
-    });
-    setTimeout(() => {
-      redirect("/login");
-    }, 1500);
+    return { success, message };
   } catch (err: any) {
     const errorMsg =
       err.response?.data?.message || "Error del servidor. Intenta más tarde.";
     toast.error(errorMsg, { richColors: true, position: "top-center" });
     console.error(err);
+
+    return { success: false, message: errorMsg };
   }
 };
 
-export const forgotPassword = async (data: UserForgotPasswordBody) => {
+export const forgotPassword = async (
+  data: UserForgotPasswordBody
+): Promise<{ success: boolean; message: string }> => {
   try {
     const { success, message }: UserForgotPasswordResponse = await api.post(
       "/auth/forgot-password",
@@ -190,25 +136,13 @@ export const forgotPassword = async (data: UserForgotPasswordBody) => {
       {}
     );
 
-    if (!success) {
-      toast.error(message, {
-        richColors: true,
-        position: "top-center",
-      });
-      return { success: false };
-    }
-
-    toast.success(message, {
-      richColors: true,
-      position: "top-center",
-    });
-    return { success };
-  } catch(err: any) {
-    const errorMsg =
-      err.response?.data?.message || "Error del servidor. Intenta más tarde.";
-    toast.error(errorMsg, { richColors: true, position: "top-center" });
-    console.error(err);
-    return { success: false };
+    return { success, message };
+  } catch (err: any) {
+    return {
+      success: false,
+      message:
+        err.response?.data?.message || "Error del servidor. Intenta más tarde.",
+    };
   }
 };
 
@@ -251,25 +185,22 @@ export const resetPassword = async (
   }
 };
 
-export const sendEmailToAdmin = async (data: UserSendEmailToAdminBody) => {
+export const sendEmailToAdmin = async (
+  data: UserSendEmailToAdminBody
+): Promise<{ success: boolean; message: string }> => {
   try {
-    const {success, message} = await api.post<UserSendEmailToAdminResponse>("user/sendEmailToAdmin", data, {});
+    const { success, message } = await api.post<UserSendEmailToAdminResponse>(
+      "user/sendEmailToAdmin",
+      data,
+      {}
+    );
 
-    if (!success) {
-      toast.error(message, {
-        richColors: true,
-        position: "top-center",
-      });
-      return;
-    }
-
-    toast.success(message, {
-      richColors: true,
-      position: "top-center",
-    });
+    return { success, message };
   } catch (err: any) {
-    const errorMsg =
-      err.response?.data?.message || "Error del servidor. Intenta más tarde.";
-    toast.error(errorMsg, { richColors: true, position: "top-center" });
+    return {
+      success: false,
+      message:
+        err.response?.data?.message || "Error del servidor. Intenta más tarde.",
+    };
   }
-}
+};

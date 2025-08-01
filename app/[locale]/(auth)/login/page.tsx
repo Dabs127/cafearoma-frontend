@@ -14,6 +14,7 @@ import {
 } from "@/schemas/auth/loginSchema";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export default function LoginPage() {
   const validationMessages = useTranslations("LoginPage.formValidation");
@@ -37,9 +38,20 @@ export default function LoginPage() {
   };
 
   const onSubmit = async (data: LoginUserValues) => {
-    const result = await loginUser(data);
+    const {success} = await loginUser(data);
 
-    if (!result.success) return;
+    if (!success){
+      toast.error(t("errorLoginMessage"), {
+        richColors: true,
+        position: "top-center",
+      });
+      return;
+    }
+
+    toast.success(t("successLoginMessage"), {
+      richColors: true,
+      position: "top-center",
+    });
 
     setLoading(true);
 

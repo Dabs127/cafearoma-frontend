@@ -14,6 +14,7 @@ import ConfirmActionModal from "@/components/ConfirmActionModal";
 import UpdateMenuItemModal from "./update/UpdateMenuItemModal";
 import MenuItemsSkeleton from "./MenuItemsSkeleton";
 import { MdNoFood } from "react-icons/md";
+import { toast } from "sonner";
 
 const categories = [
   { name: "cafes" },
@@ -70,13 +71,27 @@ export default function CategorySection() {
     <>
       {isDeleteConfirmActionModalOpen && (
         <ConfirmActionModal
+          actionTitle={t("deleteTitle")}
+          actionMessage={t("deleteMessage")}
           onClose={() => {
             setIsDeleteConfirmActionModalOpen(false);
             document.body.style.overflow = "";
           }}
           actionType="delete"
           action={async () => {
-            deleteItem(menuItemId?.toString() || "");
+            const response = await deleteItem(menuItemId?.toString() || "");
+            if (!response.success) {
+              toast.error(t("deleteSuccessMessage") || response.message, {
+                richColors: true,
+                position: "top-center",
+              });
+              return;
+            }
+
+            toast.success(t("deleteSuccessMessage") || response.message, {
+              richColors: true,
+              position: "top-center",
+            });
             const { items } = await getAllItems();
             setItems(items);
           }}

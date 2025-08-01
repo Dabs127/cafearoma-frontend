@@ -9,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 type Props = {};
 
@@ -26,9 +27,21 @@ const ForgotPasswordPage = (props: Props) => {
   const t = useTranslations("ForgotPasswordPage");
 
   const onSubmit = async (data: ForgotPasswordValues) => {
-    const res = await forgotPassword(data);
+    const {success} = await forgotPassword(data);
 
-    if (!res.success) return;
+    if (!success) {
+      toast.error(t("errorMessage") || "Correo mandado con exito", {
+        richColors: true,
+        position: "top-center",
+      });
+      return;
+    }
+
+    toast.success(t("successMessage"), {
+      richColors: true,
+      position: "top-center",
+    });
+    
 
     console.log("Todo con exito");
   };

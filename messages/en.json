@@ -31,9 +31,16 @@
       "inputEmail": "Enter your email address",
       "submitButton": "Save"
     },
+    "successUpdateMessage": "Information updated successfully!",
     "accountConfiguration": "Account Settings",
     "logout": "Log Out",
-    "deleteAccount": "Delete Account"
+    "deleteAccount": "Delete Account",
+    "deleteTitle": "Delete Account",
+    "deleteMessage": "Are you sure you want to delete your account? This action cannot be undone.",
+    "deleteSuccessMessage": "Account deleted successfully!",
+    "deleteErrorMessage": "Error deleting account, please try again.",
+    "successLogoutMessage": "You have successfully logged out!",
+    "errorLogoutMessage": "Error logging out, please try again."
   },
   "HomePage": {
     "heroDescription": "Since 2023 we have been satisfying more than 1,000 customers with our domestic and home roasted coffee. We have a diverse variety of beverages and desserts.",
@@ -56,6 +63,7 @@
     "createNewItemButton": "Add New",
     "noItemsFound": "No items found.",
     "newMenuItemModal": {
+      "updateModalTitle": "Edit Item",
       "modalTitle": "New Item",
       "name": "Enter the name of the dish",
       "price": "Enter the price of the dish",
@@ -70,7 +78,11 @@
         "breakfast": "Breakfasts",
         "lunch": "Lunch",
         "juice": "Juices"
-      }
+      },
+      "successMessage": "Item added successfully!",
+      "errorMessage": "Failed to add item, please try again.",
+      "successUpdateMessage": "Item updated successfully!",
+      "errorUpdateMessage": "Failed to update item, please try again."
     },
     "createNewMenuItemFormValidation": {
       "nameRequired": "Name is required.",
@@ -82,7 +94,11 @@
       "imageRequired": "Image is required.",
       "imageMaxSize": "The maximum image size is 5 MB.",
       "imageInvalidType": "Image must be of type JPEG, PNG, WEBP, or JPG."
-    }
+    },
+    "deleteTitle": "Delete Item",
+    "deleteMessage": "Are you sure you want to delete this item?",
+    "deleteSuccessMessage": "Item deleted successfully",
+    "deleteErrorMessage": "Failed to delete item, please try again."
   },
   "PromotionsPage": {
     "title": "Take Advantage!",
@@ -121,7 +137,9 @@
       "authenticationRequired": "Is login required to take advantage of the promotion?",
       "image": "Upload promotion image",
       "submitButton": "Save",
-      "preview": "Preview"
+      "preview": "Preview",
+      "successMessage": "Promotion updated successfully!",
+      "errorMessage": "Error updating promotion, please try again."
     },
     "updatePromotionFormValidation": {
       "endDateRequired": "Invalid date",
@@ -132,7 +150,11 @@
       "imageRequired": "Image is required.",
       "imageMaxSize": "Maximum image size is 5 MB.",
       "imageInvalidType": "Image must be JPEG, PNG, WEBP, or JPG."
-    }
+    },
+    "deleteTitle": "Delete Promotion",
+    "deleteMessage": "Are you sure you want to delete this promotion?",
+    "deleteSuccessMessage": "Promotion deleted successfully!",
+    "deleteErrorMessage": "Error deleting promotion, please try again"
   },
   "ContactPage": {
     "title": "Contact us if you want any special service!",
@@ -151,7 +173,8 @@
       "invalidEmail": "Invalid email.",
       "messageRequired": "Message is required."
     },
-    "successMessage": "Thank you for your message! We will get in touch with you soon."
+    "successMessage": "Thank you for your message! We will get in touch with you soon.",
+    "errorMessage": "Error sending message, please try again."
   },
   "AuthLayout": {
     "backHome": "Back to home"
@@ -168,7 +191,9 @@
     "formValidation": {
       "invalidEmail": "Invalid email",
       "minPasswordLength": "Password must be at least 6 characters long"
-    }
+    },
+    "successLoginMessage": "You have successfully logged in!",
+    "errorLoginMessage": "Error logging in, please try again."
   },
   "RegisterPage": {
     "titleLogin": "Login",
@@ -191,7 +216,8 @@
       "confirmPasswordRequired": "Password confirmation is required",
       "matchingPasswords": "Passwords do not match"
     },
-    "successMessage": "Registration successful! You can now log in."
+    "successMessage": "Registration successful! You can now log in.",
+    "errorMessage": "Registration failed, please try again."
   },
   "ForgotPasswordPage": {
     "titleForgot": "Password recover",
