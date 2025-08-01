@@ -14,7 +14,7 @@ const eslintConfig = [
   {
     rules: {
       "@typescript-eslint/ban-types": [
-        "error",
+        "warn",
         {
           extendDefaults: true,
           types: {

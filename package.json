@@ -11,6 +11,7 @@
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
     "@tailwindcss/postcss": "^4.1.11",
+    "@typescript-eslint/parser": "^8.38.0",
     "autoprefixer": "^10.4.21",
     "axios": "^1.8.4",
     "i18next": "^25.2.1",
@@ -32,6 +33,7 @@
     "@types/node": "^20.19.9",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@typescript-eslint/eslint-plugin": "^8.38.0",
     "eslint": "^9.32.0",
     "eslint-config-next": "15.2.3",
     "tailwindcss": "^4.1.11",
