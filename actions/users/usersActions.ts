@@ -32,7 +32,6 @@ export const registerUser = async (
 
     return { success, message: resData.message };
   } catch (err: any) {
-    console.error(err);
 
     return {
       success: false,
@@ -49,7 +48,6 @@ export const loginUser = async (data: UserLoginData) => {
 
     return { success, message: resData.message };
   } catch (err: any) {
-    console.error(err);
     return { success: false };
   }
 };
@@ -180,7 +178,6 @@ export const resetPassword = async (
     const errorMsg =
       err.response?.data?.message || "Error del servidor. Intenta más tarde.";
     toast.error(errorMsg, { richColors: true, position: "top-center" });
-    console.error(err);
     return { success: false };
   }
 };
