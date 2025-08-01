@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   getRegisterUserFormSchema,
@@ -34,7 +34,8 @@ export default function RegisterPage() {
     setWeAreInLoginForm(!weAreInLoginForm);
   };
 
-  const onSubmit = async (data: any) => {
+
+  const onSubmit = async (data: RegisterUserValues) => {
     const response = await registerUser(data);
 
     if (!response.success) {

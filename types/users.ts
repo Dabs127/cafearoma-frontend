@@ -9,7 +9,8 @@ export interface UserRegisterData extends Record<string, unknown> {
     username: string;
     email: string;
     password: string;
-    phone: string;
+    confirm_password?: string;
+    phone?: string;
 }
 
 export interface UserRegisterResponse {

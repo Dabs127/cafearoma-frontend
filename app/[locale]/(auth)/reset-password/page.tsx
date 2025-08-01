@@ -11,9 +11,8 @@ import { redirect, useSearchParams } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
 
-type Props = {};
 
-const ResetPasswordPage = (props: Props) => {
+const ResetPasswordPage = () => {
   const validationMessages = useTranslations(
     "ResetPasswordPage.formValidation"
   );

@@ -17,18 +17,19 @@ const eslintConfig = [
       "@typescript-eslint": eslintPluginTypeScript,
     },
     rules: {
-      "@typescript-eslint/ban-types": [
-        "warn",
-        {
-          extendDefaults: true,
-          types: {
-            object: {
-              message: "Usa Record<string, unknown> en lugar de object",
-              fixWith: "Record<string, unknown>",
-            },
-          },
-        },
-      ],
+      allowObjectTypes: "off",
+      // "@typescript-eslint/ban-types": [
+      //   "warn",
+      //   {
+      //     extendDefaults: true,
+      //     types: {
+      //       object: {
+      //         message: "Usa Record<string, unknown> en lugar de object",
+      //         fixWith: "Record<string, unknown>",
+      //       },
+      //     },
+      //   },
+      // ],
     },
   },
 ];
