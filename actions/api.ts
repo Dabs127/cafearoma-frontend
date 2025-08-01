@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: process.env.BACKEND_URL || "http://localhost:3000/api",
+  baseURL: "https://cafearoma-backend.onrender.com",
   withCredentials: true,
 });
 
