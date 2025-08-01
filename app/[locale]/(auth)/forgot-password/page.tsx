@@ -11,9 +11,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-type Props = {};
 
-const ForgotPasswordPage = (props: Props) => {
+const ForgotPasswordPage = () => {
   const validationMessages = useTranslations("ForgotPasswordPage.formValidation");
 
   const {

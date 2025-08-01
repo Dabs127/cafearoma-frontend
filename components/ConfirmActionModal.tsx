@@ -1,19 +1,16 @@
-import { deleteUserProfile } from "@/actions/users/usersActions";
-import { toast } from "sonner";
-
 type Props = {
   actionTitle: string;
   actionMessage: string;
   onClose: () => void;
   actionType: "delete" | "confirm";
-  action: (...args: any[]) => void | Promise<void>;
+  action: (...args: unknown[]) => void | Promise<void>;
   id?: string;
 };
 
 type ActionProps = {
   id?: string;
   onClose: () => void;
-  action: (...args: any[]) => void | Promise<void>;
+  action: (...args: unknown[]) => void | Promise<void>;
   data?: FormData;
 };
 

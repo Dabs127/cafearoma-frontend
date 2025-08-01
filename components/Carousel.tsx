@@ -5,22 +5,27 @@ import { useEffect, useState } from "react";
 import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa";
 
 type Props = {
-  slides: any[];
+  slides:   {
+    src: string,
+    alt: string,
+    title: string,
+    description: string,
+  }[];
 };
 
 const Carousel = (props: Props) => {
-  let [current, setCurrent] = useState(0);
+  const [current, setCurrent] = useState(0);
 
-  let previousSlide = () => {
+  const previousSlide = () => {
     setCurrent(current === 0 ? props.slides.length - 1 : current - 1);
   };
 
-  let nextSlide = () => {
+  const nextSlide = () => {
     setCurrent(current === props.slides.length - 1 ? 0 : current + 1);
   };
 
   useEffect(() => {
-    let interval = setInterval(() => {
+    const interval = setInterval(() => {
       setCurrent(current === props.slides.length - 1 ? 0 : current + 1);
     }, 7000);
 

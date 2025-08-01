@@ -12,7 +12,6 @@ import {
   getLoginUserFormSchema,
   LoginUserValues,
 } from "@/schemas/auth/loginSchema";
-import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -27,7 +26,6 @@ export default function LoginPage() {
   });
 
   const [weAreInLoginForm, setWeAreInLoginForm] = useState<boolean>(false);
-  const pathName = usePathname();
 
   const { setSession, setLoading } = useSessionStore();
 

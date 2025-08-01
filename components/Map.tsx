@@ -5,14 +5,14 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { useEffect, useRef } from "react";
 
 const Map = () => {
-  const mapContainerRef = useRef<any>(null);
+  const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<mapboxgl.Map | null>(null);
 
   useEffect(() => {
     // console.log("Mapbox access token:", process.env.NEXT_PUBLIC_API_MAPBOX);
     mapboxgl.accessToken = process.env.NEXT_PUBLIC_API_MAPBOX || "";
     mapRef.current = new mapboxgl.Map({
-      container: mapContainerRef.current,
+      container: mapContainerRef.current as HTMLDivElement,
       center: [-100.308318, 25.666685], // Barrio Antiguo, Nuevo León coordinates
       zoom: 16,
     });

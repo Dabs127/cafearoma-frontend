@@ -1,6 +1,7 @@
 // postcss.config.js o .ts (ESM)
 const config = {
   plugins: {
+    "@tailwindcss/postcss": {},
     autoprefixer: {},
   },
 };
