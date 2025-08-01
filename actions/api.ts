@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: process.env.BACKEND_URL || "http://localhost:3000/api",
+  baseURL: process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:3000/api",
   withCredentials: true,
 });
 
@@ -48,7 +48,7 @@ const put = async <T>(
     });
     return response.data;
   } catch (error) {
-    if (process.env.NODE_ENV === "development") {
+    if (process.env.NEXT_PUBLIC_NODE_ENV === "development") {
       console.error("Error putting data");
     }
 
@@ -64,7 +64,7 @@ const patch = async <T>(
     const response = await axiosInstance.patch(url, data, config);
     return response.data;
   } catch (error) {
-    if (process.env.NODE_ENV === "development") {
+    if (process.env.NEXT_PUBLIC_NODE_ENV === "development") {
       console.error("Error patching data:", error);
     }
     throw error;
@@ -78,7 +78,7 @@ const del = async <T>(
     const response = await axiosInstance.delete(url, config);
     return response.data;
   } catch (error) {
-    if (process.env.NODE_ENV === "development") {
+    if (process.env.NEXT_PUBLIC_NODE_ENV === "development") {
       console.error("Error deleting data:", error);
     }
     throw error;
