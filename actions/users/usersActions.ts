@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   UserDeleteResponse,
   UserForgotPasswordBody,
@@ -15,9 +16,7 @@ import {
   UserUpdateResponse,
 } from "@/types/users";
 import { api } from "../api";
-import { redirect } from "next/navigation";
 import { toast } from "sonner";
-import { getTranslations } from "next-intl/server";
 
 export const registerUser = async (
   data: UserRegisterData
@@ -47,6 +46,7 @@ export const loginUser = async (data: UserLoginData) => {
     const { success, data: resData } = response;
 
     return { success, message: resData.message };
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (err: any) {
     return { success: false };
   }

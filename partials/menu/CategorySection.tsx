@@ -5,7 +5,7 @@ import MenuItemCard from "@/partials/menu/MenuItemCard";
 import {
   deleteItem,
   getAllItems,
-  updateItem,
+  
 } from "@/actions/items/itemsActions";
 import useItemFilterStore from "@/stores/useItemFilterStore";
 import useItemsStore from "@/stores/useItemsStore";
@@ -49,7 +49,7 @@ export default function CategorySection() {
       setIsLoading(false);
     };
     fetchItems();
-  }, []);
+  }, [setItems]);
 
   const handleOpenDeleteModal = (id: string) => {
     setIsDeleteConfirmActionModalOpen(!isDeleteConfirmActionModalOpen);
