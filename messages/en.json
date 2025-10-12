@@ -165,7 +165,8 @@
       "name": "Name",
       "email": "Email",
       "message": "Message",
-      "submitButton": "Send"
+      "submitButton": "Send",
+      "sendingButton": "Enviando"
     },
     "formValidation": {
       "nameRequired": "Name is required.",
