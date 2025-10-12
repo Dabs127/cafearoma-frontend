@@ -3,7 +3,7 @@
 Una aplicación web full stack para mostrar productos, promociones y contacto de un negocio, con un panel de administración para gestionar productos y promociones.  
 Soporta dos roles: **Usuario** y **Administrador**.
 
-![Demo](<img width="1896" height="938" alt="image" src="https://github.com/user-attachments/assets/8f2b3069-7388-4df0-a72a-e1e871f4eaeb" />)  
+![Demo](https://github.com/user-attachments/assets/8f2b3069-7388-4df0-a72a-e1e871f4eaeb)
 
 ---
 
